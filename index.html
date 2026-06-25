@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Nama Kamu] | Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;       /* Hitam pekat */
+            --text-color: #e0e0e0;     /* Putih gading redup */
+            --accent-color: #888888;   /* Abu-abu analog */
+            --scanline-opacity: 0.08; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999;
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            padding: 5rem 0 3rem 0;
+            border-bottom: 1px dashed var(--accent-color);
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px dashed var(--accent-color);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--accent-color);
+            padding: 1.5rem;
+            background: rgba(25, 25, 25, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--text-color);
+            background: rgba(25, 25, 25, 0.5);
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            list-style: none;
+        }
+
+        .skill-item {
+            border: 1px solid var(--accent-color);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .skill-item.mastered {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+            font-weight: bold;
+        }
+
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        a:hover {
+            border-bottom-color: var(--text-color);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: var(--text-color);
+            animation: blink 0.8s infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1 class="title">> <span id="typewriter">Jabarra-Keanu</span><span class="cursor">&nbsp;</span></h1>
+            <p class="tagline">15 Y.O. Game Developer | Godot Engine Adept</p>
+        </header>
+
+        <section id="about">
+            <h2>// STATUS</h2>
+            <p>[Tulis deskripsi singkat tentang dirimu di sini. Ceritakan visi game atau fokus keahlian yang sedang kamu pelajari/kuasai sekarang secara singkat dan padat.]</p>
+        </section>
+
+        <section id="projects">
+            <h2>// PROJECT ARCHIVE</h2>
+            <div class="project-grid">
+                
+                <div class="project-card">
+                    <h3 class="project-title">[Nama Proyek 1]</h3>
+                    <p class="project-desc">[Deskripsi singkat mengenai game/proyek pertama yang kamu buat di sini.]</p>
+                    <div class="project-tech">Engine: Godot</div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>// MODUL_KEAHLIAN</h2>
+            <ul class="skill-list">
+                <li class="skill-item mastered">Godot Engine (Mastered)</li>
+                <li class="skill-item mastered">GDScript</li>
+                <li class="skill-item">Narative Designer</li>
+                <li class="skill-item">2D Artist</li>
+                <li class="skill-item">...</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>// HUBUNGI</h2>
+            <p>E-mail: <a href="mailto:emailmu@domain.com">[fredick.xdevs@domain.com]</a></p>
+            <p>GitHub: <a href="https://github.com/usernamemu" target="_blank">github.com/NaKenx-Kenx</a></p>
+        </section>
+
+        <footer>
+            <p>© <span id="year"></span> [NAMA_KAMU]. ALL SYSTEMS OPERATIONAL.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const nameText = "Keanu el jabar nagaputra";
+        let index = 0;
+        const speed = 150; 
+        const element = document.getElementById("typewriter");
+        
+        element.textContent = ""; 
+
+        function typeEffect() {
+            if (index < nameText.length) {
+                element.textContent += nameText.charAt(index);
+                index++;
+                setTimeout(typeEffect, speed);
+            }
+        }
+        
+        window.onload = typeEffect;
+    </script>
+</body>
+</html>

@@ -131,7 +131,7 @@
 
         .skill-item:hover {
             border-color: #fff;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .skill-item.mastered {
@@ -206,30 +206,30 @@
         </section>
 
         <section id="projects">
-            <h2>// PROJECT ARCHIVE (LIVE_FEED)</h2>
+            <h2>// PROJECT ARCHIVE (LIVE_DOM_SCRAPE)</h2>
             <div class="project-grid" id="itch-projects">
-                <p class="loading-text">> CONNECTING_TO_ITCH_IO_API...</p>
+                <p class="loading-text">> INITIATING_CORS_PROXY_DESERIALIZER... CONNECTING_TO_ITCH...</p>
             </div>
         </section>
 
         <section id="skills">
             <h2>// SKILLS_MOD</h2>
             <ul class="skill-list">
-                <li class="skill-item mastered" data-info="Engine utama dengan jam terbang tinggi. Ready untuk arsitektur sistem kompleks.">Godot Engine (Mastered)</li>
-                <li class="skill-item mastered" data-info="Sangat paham siklus hidup node, sinyal, static typing, dan optimasi runtime script.">GDScript</li>
-                <li class="skill-item" data-info="Mampu mengolah data, algoritma dasar, otomatisasi, atau integrasi skrip eksternal.">Python</li>
-                <li class="skill-item" data-info="Fokus pengembangan game ruang dua dimensi, fisika 2D, tilemaps, dan viewport handling.">2D</li>
-                <li class="skill-item" data-info="Siap mengeksplorasi modul dan teknologi baru sesuai kebutuhan proyek berikutnya.">...</li>
+                <li class="skill-item mastered" data-info="Engine utama dengan jam terbang tinggi. Mahir arsitektur node dan optimasi scene.">Godot Engine (Mastered)</li>
+                <li class="skill-item mastered" data-info="Sangat menguasai siklus hidup skrip, sinyal bawaan, static typing, dan sistem runtime.">GDScript</li>
+                <li class="skill-item" data-info="Pemrosesan logika tingkat lanjut, manajemen data, automasi skrip, atau integrasi luar.">Python</li>
+                <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 2D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport viewport.">2D</li>
+                <li class="skill-item" data-info="Modul kosong siap diisi dengan kerangka kerja atau teknologi baru di masa depan.">...</li>
             </ul>
         </section>
 
         <section id="contact">
             <h2>// CONTACT</h2>
-            <p>E-mail: <a href="mailto:fredick.xdevs@gmail.com" class="contact-link" data-target="Email Engine">fredick.xdevs@gmail.com</a></p>
-            <p>GitHub: <a href="https://github.com/NaKenx-Kenx" target="_blank" class="contact-link" data-target="GitHub Code Repository">github.com/NaKenx-Kenx</a></p>
-            <p>Itch.io: <a href="https://kenx-indie-dev.itch.io/" target="_blank" class="contact-link" data-target="Itch.io Game Lab">kenx-indie-dev.itch.io</a></p>
-            <p>TikTok: <a href="https://www.tiktok.com/@jabarras_u" target="_blank" class="contact-link" data-target="TikTok Social Feed">@jabarras_u</a></p>
-            <p>YouTube: <a href="https://www.youtube.com/@Jabarras-gd" target="_blank" class="contact-link" data-target="YouTube Devlog Channel">@Jabarras-gd</a></p>
+            <p>E-mail: <a href="mailto:fredick.xdevs@gmail.com" class="contact-link" data-target="E-mail Client Pipeline">fredick.xdevs@gmail.com</a></p>
+            <p>GitHub: <a href="https://github.com/NaKenx-Kenx" target="_blank" class="contact-link" data-target="GitHub Code Storage">github.com/NaKenx-Kenx</a></p>
+            <p>Itch.io: <a href="https://kenx-indie-dev.itch.io/" target="_blank" class="contact-link" data-target="Itch.io Game Laboratory">kenx-indie-dev.itch.io</a></p>
+            <p>TikTok: <a href="https://www.tiktok.com/@jabarras_u" target="_blank" class="contact-link" data-target="TikTok Developer Log Feed">@jabarras_u</a></p>
+            <p>YouTube: <a href="https://www.youtube.com/@Jabarras-gd" target="_blank" class="contact-link" data-target="YouTube Video Architecture Channel">@Jabarras-gd</a></p>
         </section>
 
         <footer>
@@ -239,7 +239,7 @@
     </div>
 
     <div class="system-hud">
-        <span id="log-status">> STATUS: IDLE. SYSTEM READY.</span>
+        <span id="log-status">> STATUS: IDLE. CORE SYSTEM ONLINE.</span>
         <span id="hud-clock">00:00:00</span>
     </div>
 
@@ -260,57 +260,73 @@
             }
         }
 
-        async function loadItchGames() {
+        async function scrapeItchGames() {
             const container = document.getElementById("itch-projects");
-            const itchUser = "kenx-indie-dev";
+            const targetUrl = "https://kenx-indie-dev.itch.io/";
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
             
             try {
-                const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://${itchUser}.itch.io/feed.xml`);
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error("Proxy connection dropped");
+                
                 const data = await response.json();
+                const htmlString = data.contents; 
 
-                if(data.status === 'ok' && data.items.length > 0) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlString, "text/html");
+
+                const gameCells = doc.querySelectorAll(".game_cell");
+
+                if (gameCells.length > 0) {
                     container.innerHTML = "";
-                    
-                    data.items.forEach(game => {
-                        let desc = game.description.replace(/<\/?[^>]+(>|$)/g, "").trim();
-                        if (desc.length > 120) desc = desc.substring(0, 120) + "...";
-                        
+
+                    gameCells.forEach(cell => {
+                        const titleElement = cell.querySelector(".game_title a");
+                        const title = titleElement ? titleElement.textContent.trim() : "Project_Unnamed.exe";
+                        const link = titleElement ? titleElement.getAttribute("href") : targetUrl;
+
+                        const descElement = cell.querySelector(".game_text");
+                        let desc = descElement ? descElement.textContent.trim() : "No active sub-description found in cell archive.";
+                        if (desc.length > 100) desc = desc.substring(0, 100) + "...";
+
                         const card = document.createElement("div");
                         card.className = "project-card";
-                        card.setAttribute("data-game", game.title);
                         card.innerHTML = `
                             <div>
-                                <h3 class="project-title">${game.title}</h3>
-                                <p class="project-desc">${desc || 'No description provided.'}</p>
+                                <h3 class="project-title">${title}</h3>
+                                <p class="project-desc">${desc}</p>
                             </div>
                             <div class="project-tech">
-                                <a href="${game.link}" target="_blank">> LAUNCH_GAME</a>
+                                <a href="${link}" target="_blank">> LAUNCH_PROG</a>
                             </div>
                         `;
-                    
-                        card.addEventListener("mouseenter", () => updateLog(`> READING_DATA: ${game.title.toUpperCase()} // READY_TO_LAUNCH`));
+                        
+                        card.addEventListener("mouseenter", () => updateLog(`> READ_DOM_NODE: MOUNTED [${title.toUpperCase()}] // STABLE_STATE`));
                         card.addEventListener("mouseleave", resetLog);
 
                         container.appendChild(card);
                     });
-                    updateLog("> STATUS: ALL GAMES LOADED SUCCESSFULY FROM ARCHIVE.");
+
+                    updateLog(`> STATUS: PARSED SUCCESSFULLY. CORES DETECTED: [0x00${gameCells.length}].`);
                 } else {
                     displayFallback(container);
                 }
+
             } catch (err) {
-                console.error(err);
+                console.error("Scraping execution halted:", err);
                 displayFallback(container);
             }
         }
 
         function displayFallback(container) {
             container.innerHTML = `
-                <div class="project-card">
-                    <h3 class="project-title">Direct Connection Halted</h3>
-                    <p class="project-desc">Gagal memuat otomatis (CORS/Network rate-limit). Akses repositori game langsung lewat tautan eksternal.</p>
-                    <div class="project-tech"><a href="https://kenx-indie-dev.itch.io/" target="_blank">> OPEN_ITCH_IO_MANUALLY</a></div>
+                <div class="project-card" style="grid-column: 1 / -1;">
+                    <h3 class="project-title">Secure Connection Bypass Failure</h3>
+                    <p class="project-desc">Gerbang CORS Proxy pihak ketiga sedang sibuk atau melambat. Struktur data HTML dari luar gagal di-parse secara langsung saat ini.</p>
+                    <div class="project-tech"><a href="https://kenx-indie-dev.itch.io/" target="_blank">> ENTER_LAB_MANUALLY</a></div>
                 </div>
             `;
+            updateLog("> STATUS: ERROR. TARGET DOM ACCESS OVERLOADED.");
         }
 
         const logStatus = document.getElementById("log-status");
@@ -321,23 +337,17 @@
         }
 
         function resetLog() {
-            logStatus.textContent = "> STATUS: IDLE. MONITORING ACTIVE.";
-            logStatus.style.color = "#888888";
+            logStatus.textContent = "> STATUS: IDLE. INTERACTIVE MONITOR READY.";
+            logStatus.style.color = "#888888"; 
         }
 
         document.querySelectorAll(".skill-item").forEach(item => {
-            item.addEventListener("mouseenter", () => {
-                const info = item.getAttribute("data-info");
-                updateLog(`> INSPECT_MODULE: ${info}`);
-            });
+            item.addEventListener("mouseenter", () => updateLog(`> ANALYZING_MODULE: ${item.getAttribute("data-info")}`));
             item.addEventListener("mouseleave", resetLog);
         });
 
         document.querySelectorAll(".contact-link").forEach(link => {
-            link.addEventListener("mouseenter", () => {
-                const target = link.getAttribute("data-target");
-                updateLog(`> LINK_READY: REDIRECTING TO [${target.toUpperCase()}]`);
-            });
+            link.addEventListener("mouseenter", () => updateLog(`> NETWORK_LINK: READY TO INITIALIZE [${link.getAttribute("data-target").toUpperCase()}]`));
             link.addEventListener("mouseleave", resetLog);
         });
 
@@ -348,7 +358,7 @@
 
         window.onload = () => {
             typeEffect();
-            loadItchGames();
+            scrapeItchGames();
         };
     </script>
 </body>

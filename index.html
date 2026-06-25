@@ -6,9 +6,12 @@
     <title>Keanu | Portfolio</title>
     <style>
         :root {
-            --bg-color: #0a0a0a;       /* Hitam pekat */
-            --text-color: #e0e0e0;     /* Putih gading redup */
-            --accent-color: #888888;   /* Abu-abu analog */
+            --bg-color: #050505;
+            --text-color: #f0f0f0;
+            --text-muted: #888888;
+            --accent-color: #333333;
+            --terminal-green: #00ff66;
+            --card-bg: rgba(10, 10, 10, 0.75);
         }
 
         * {
@@ -17,12 +20,34 @@
             padding: 0;
         }
 
-        body {
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
             background-color: var(--bg-color);
+        }
+
+        body {
+            background-color: transparent; 
             color: var(--text-color);
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1.6;
+            font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+            line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #fluid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none; 
+            display: block;
         }
 
         body::before {
@@ -30,155 +55,373 @@
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
             z-index: 9999;
-            background-size: 100% 3px, 6px 100%;
+            background-size: 100% 4px, 6px 100%;
             pointer-events: none;
         }
 
+        /* Minimal Header Navigation */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            color: var(--terminal-green);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-color);
+            border-bottom: 1px solid var(--text-color);
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 2rem;
-            padding-bottom: 6rem; 
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         header {
-            padding: 5rem 0 3rem 0;
+            padding: 10rem 0 4rem 0;
             border-bottom: 1px dashed var(--accent-color);
         }
 
         .title {
-            font-size: 2rem;
+            font-size: 2.4rem;
             font-weight: normal;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            color: var(--text-color);
         }
 
         .tagline {
-            color: var(--accent-color);
-            font-size: 1rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
         }
 
         section {
-            padding: 3rem 0;
+            padding: 5rem 0;
             border-bottom: 1px dashed var(--accent-color);
         }
 
         h2 {
-            font-size: 1.2rem;
-            font-weight: normal;
+            font-size: 0.95rem;
+            font-weight: 600;
             letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-            color: var(--accent-color);
+            margin-bottom: 2.5rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--terminal-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .about-layout {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-wrapper {
+            position: relative;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border: 1px solid var(--accent-color);
+            filter: grayscale(100%) contrast(110%);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            display: block;
+        }
+
+        .profile-img:hover {
+            filter: grayscale(0%) contrast(100%);
+            border-color: var(--terminal-green);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 280px;
+            font-size: 1rem;
+            color: #ccc;
+            line-height: 1.8;
         }
 
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 2rem;
         }
 
         .project-card {
             border: 1px solid var(--accent-color);
-            padding: 1.5rem;
-            background: rgba(25, 25, 25, 0.2);
-            transition: all 0.2s ease;
+            background: var(--card-bg);
+            backdrop-filter: blur(4px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            overflow: hidden;
         }
 
         .project-card:hover {
-            border-color: var(--text-color);
-            background: rgba(25, 25, 25, 0.5);
-            transform: scale(1.01);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(20, 20, 20, 0.85);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 255, 102, 0.1);
+        }
+
+        .project-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            border-bottom: 1px solid var(--accent-color);
+            overflow: hidden;
+            background: #111;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.8);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover .project-image {
+            filter: grayscale(0%) brightness(1px);
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .project-title {
             font-size: 1.1rem;
+            font-weight: 500;
             margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
 
         .project-desc {
-            font-size: 0.9rem;
-            color: #a0a0a0;
-            margin-bottom: 1rem;
-        }
-
-        .project-tech {
             font-size: 0.8rem;
-            color: var(--accent-color);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .project-meta {
             margin-top: auto;
-        }
-
-        .skill-list {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            list-style: none;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .skill-item {
-            border: 1px solid var(--accent-color);
-            padding: 0.4rem 0.8rem;
-            font-size: 0.9rem;
-            cursor: crosshair;
+        .project-tech-tag {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2px 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .launch-btn {
+            background: transparent;
+            color: var(--text-color);
+            text-decoration: none;
+            border: 1px solid var(--text-muted);
+            padding: 4px 12px;
+            font-size: 0.75rem;
             transition: all 0.2s ease;
         }
 
-        .skill-item:hover {
-            border-color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .skill-item.mastered {
-            background-color: var(--text-color);
+        .launch-btn:hover {
+            background: var(--text-color);
             color: var(--bg-color);
             border-color: var(--text-color);
             font-weight: bold;
         }
 
-        footer {
-            padding: 3rem 0;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--accent-color);
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .skill-item {
+            border: 1px solid var(--accent-color);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 1.2rem;
+            cursor: crosshair;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .skill-name {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .skill-level-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .skill-progress-bg {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress-fill {
+            height: 100%;
+            background: var(--text-muted);
+            width: 0%;
+            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .skill-item:hover .skill-progress-fill {
+            background: var(--terminal-green);
+            box-shadow: 0 0 8px var(--terminal-green);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .contact-item svg {
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover svg {
+            color: var(--terminal-green);
+            filter: drop-shadow(0 0 4px var(--terminal-green));
         }
 
         a {
             color: var(--text-color);
             text-decoration: none;
-            border-bottom: 1px solid var(--accent-color);
             transition: all 0.2s ease;
         }
 
-        a:hover {
+        .contact-link {
+            border-bottom: 1px solid transparent;
+            color: var(--text-muted);
+        }
+        
+        .contact-link:hover {
             border-bottom-color: var(--text-color);
-            color: #fff;
+            color: var(--text-color);
         }
 
         .cursor {
             display: inline-block;
-            width: 10px;
-            background-color: var(--text-color);
+            width: 8px;
+            height: 1.2em;
+            background-color: var(--terminal-green);
             animation: blink 0.8s infinite;
-            margin-left: 5px;
+            vertical-align: middle;
+            margin-left: 4px;
         }
 
+        /* Fixed System HUD */
         .system-hud {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            background: #000;
+            background: #030303;
             border-top: 1px solid var(--accent-color);
-            padding: 0.5rem 2rem;
-            font-size: 0.8rem;
-            color: #00ff00;
+            padding: 0.6rem 2rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
             z-index: 10000;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+        }
+
+        #log-status {
+            font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 70%;
+        }
+
+        #hud-clock {
+            color: var(--text-color);
+            letter-spacing: 1px;
         }
 
         @keyframes blink {
@@ -186,56 +429,139 @@
         }
         
         .loading-text {
-            color: var(--accent-color);
+            color: var(--text-muted);
             font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            padding: 4rem 0 8rem 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.02);
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar { padding: 1rem; }
+            .nav-links { gap: 0.8rem; }
+            .nav-links a { font-size: 0.75rem; }
+            header { padding: 8rem 0 3rem 0; }
+            .title { font-size: 1.8rem; }
+            section { padding: 3.5rem 0; }
         }
     </style>
 </head>
 <body>
+    
+    <canvas id="fluid-bg"></canvas>
+
+    <nav class="nav-bar">
+        <div class="nav-logo">> KEANU.DEV</div>
+        <div class="nav-links">
+            <a href="#about">// STATUS</a>
+            <a href="#projects">// ARCHIVE</a>
+            <a href="#skills">// SKILLS</a>
+            <a href="#contact">// PIPELINE</a>
+        </div>
+    </nav>
 
     <div class="container">
-        
         <header>
-            <h1 class="title">> <span id="typewriter">Jabarra-Keanu</span><span class="cursor">&nbsp;</span></h1>
-            <p class="tagline">15 Y.O. Game Developer | Godot Engine Adept</p>
+            <h1 class="title">> <span id="typewriter">Jabarra-Keanu</span><span class="cursor"></span></h1>
+            <p class="tagline">15 Y.O. Game Developer & Architecture Optimizer | Godot Adept</p>
         </header>
 
         <section id="about">
-            <h2>// STATUS</h2>
-            <p>I am a 15 year old game developer/programmer looking to generate income at a young age.</p>
+            <h2>// STATUS_MANIFEST</h2>
+            <div class="about-layout">
+                <div class="profile-wrapper">
+                    <img src="https://i.ibb.co.com/bgxk8GSk/reeprof.png" alt="Keanu Profile" class="profile-img" id="profile-avatar">
+                </div>
+                <div class="about-text">
+                    <p>I am a 15-year-old game developer and programmer focused on building high-performance systems. Operating primarily within 2D architecture optimization, procedural pipeline generation, and modular visual log logic.</p>
+                </div>
+            </div>
         </section>
 
         <section id="projects">
-            <h2>// PROJECT ARCHIVE (LIVE_DOM_SCRAPE)</h2>
+            <h2>// PROJECT_ARCHIVE (LOCAL_MANIFEST_LOAD)</h2>
             <div class="project-grid" id="itch-projects">
-                <p class="loading-text">> INITIATING_CORS_PROXY_DESERIALIZER... CONNECTING_TO_ITCH...</p>
+                <p class="loading-text">> MOUNTING_LOCAL_DATABASE... LOADING_ARCHIVE_DATA...</p>
             </div>
         </section>
 
         <section id="skills">
-            <h2>// SKILLS_MOD</h2>
+            <h2>// CAPABILITY_MODULES</h2>
             <ul class="skill-list">
-                <li class="skill-item mastered" data-info="Engine utama dengan jam terbang tinggi. Mahir arsitektur node dan optimasi scene.">Godot Engine (Mastered)</li>
-                <li class="skill-item mastered" data-info="Sangat menguasai siklus hidup skrip, sinyal bawaan, static typing, dan sistem runtime.">GDScript</li>
-                <li class="skill-item" data-info="Pemrosesan logika tingkat lanjut, manajemen data, automasi skrip, atau integrasi luar.">Python</li>
-                <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 2D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport viewport.">2D</li>
-                <li class="skill-item" data-info="Modul kosong siap diisi dengan kerangka kerja atau teknologi baru di masa depan.">...</li>
+                <li class="skill-item" data-info="Engine utama dengan jam terbang tinggi. Mahir arsitektur node dan optimasi scene.">
+                    <div class="skill-name">
+                        <span>Godot Engine</span>
+                        <span class="skill-level-text">MASTERED</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div>
+                    </div>
+                </li>
+                <li class="skill-item" data-info="Sangat menguasai siklus hidup skrip, sinyal bawaan, static typing, dan sistem runtime.">
+                    <div class="skill-name">
+                        <span>GDScript</span>
+                        <span class="skill-level-text">MASTERED</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div>
+                    </div>
+                </li>
+                <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 2D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport shader.">
+                    <div class="skill-name">
+                        <span>2D Physics & Shaders</span>
+                        <span class="skill-level-text">ADVANCED (80%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 80%;"></div>
+                    </div>
+                </li>
+                <li class="skill-item" data-info="Pemrosesan logika tingkat lanjut, manajemen data, automasi skrip, atau integrasi eksternal.">
+                    <div class="skill-name">
+                        <span>Python Scripting</span>
+                        <span class="skill-level-text">STABLE (60%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 60%;"></div>
+                    </div>
+                </li>
             </ul>
         </section>
 
         <section id="contact">
-            <h2>// CONTACT</h2>
-            <p>E-mail: <a href="mailto:fredick.xdevs@gmail.com" class="contact-link" data-target="E-mail Client Pipeline">fredick.xdevs@gmail.com</a></p>
-            <p>GitHub: <a href="https://github.com/NaKenx-Kenx" target="_blank" class="contact-link" data-target="GitHub Code Storage">github.com/NaKenx-Kenx</a></p>
-            <p>Itch.io: <a href="https://kenx-indie-dev.itch.io/" target="_blank" class="contact-link" data-target="Itch.io Game Laboratory">kenx-indie-dev.itch.io</a></p>
-            <p>TikTok: <a href="https://www.tiktok.com/@jabarras_u" target="_blank" class="contact-link" data-target="TikTok Developer Log Feed">@jabarras_u</a></p>
-            <p>YouTube: <a href="https://www.youtube.com/@Jabarras-gd" target="_blank" class="contact-link" data-target="YouTube Video Architecture Channel">@Jabarras-gd</a></p>
+            <h2>// CONTACT_PIPELINE</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <a href="mailto:fredick.xdevs@gmail.com" class="contact-link" data-target="E-mail Client Pipeline">fredick.xdevs@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <a href="https://github.com/NaKenx-Kenx" target="_blank" class="contact-link" data-target="GitHub Code Storage">github.com/NaKenx-Kenx</a>
+                </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <a href="https://kenx-indie-dev.itch.io/" target="_blank" class="contact-link" data-target="Itch.io Game Laboratory">kenx-indie-dev.itch.io</a>
+                </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <a href="https://www.tiktok.com/@jabarras_u" target="_blank" class="contact-link" data-target="TikTok Dev Log Feed">@jabarras_u</a>
+                </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    <a href="https://www.youtube.com/@Jabarras-gd" target="_blank" class="contact-link" data-target="YouTube Channel">@Jabarras-gd</a>
+                </div>
+            </div>
         </section>
 
         <footer>
             <p>© <span id="year"></span> Jabarra. ALL SYSTEMS OPERATIONAL.</p>
         </footer>
-
     </div>
 
     <div class="system-hud">
@@ -248,7 +574,7 @@
 
         const nameText = "Keanu el jabar nagaputra";
         let index = 0;
-        const speed = 120; 
+        const speed = 100; 
         const element = document.getElementById("typewriter");
         element.textContent = ""; 
 
@@ -260,95 +586,126 @@
             }
         }
 
-        async function scrapeItchGames() {
-            const container = document.getElementById("itch-projects");
-            const targetUrl = "https://kenx-indie-dev.itch.io/";
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
-            
-            try {
-                const response = await fetch(proxyUrl);
-                if (!response.ok) throw new Error("Proxy connection dropped");
-                
-                const data = await response.json();
-                const htmlString = data.contents; 
-
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlString, "text/html");
-
-                const gameCells = doc.querySelectorAll(".game_cell");
-
-                if (gameCells.length > 0) {
-                    container.innerHTML = "";
-
-                    gameCells.forEach(cell => {
-                        const titleElement = cell.querySelector(".game_title a");
-                        const title = titleElement ? titleElement.textContent.trim() : "Project_Unnamed.exe";
-                        const link = titleElement ? titleElement.getAttribute("href") : targetUrl;
-
-                        const descElement = cell.querySelector(".game_text");
-                        let desc = descElement ? descElement.textContent.trim() : "No active sub-description found in cell archive.";
-                        if (desc.length > 100) desc = desc.substring(0, 100) + "...";
-
-                        const card = document.createElement("div");
-                        card.className = "project-card";
-                        card.innerHTML = `
-                            <div>
-                                <h3 class="project-title">${title}</h3>
-                                <p class="project-desc">${desc}</p>
-                            </div>
-                            <div class="project-tech">
-                                <a href="${link}" target="_blank">> LAUNCH_PROG</a>
-                            </div>
-                        `;
-                        
-                        card.addEventListener("mouseenter", () => updateLog(`> READ_DOM_NODE: MOUNTED [${title.toUpperCase()}] // STABLE_STATE`));
-                        card.addEventListener("mouseleave", resetLog);
-
-                        container.appendChild(card);
-                    });
-
-                    updateLog(`> STATUS: PARSED SUCCESSFULLY. CORES DETECTED: [0x00${gameCells.length}].`);
-                } else {
-                    displayFallback(container);
-                }
-
-            } catch (err) {
-                console.error("Scraping execution halted:", err);
-                displayFallback(container);
+        let audioCtx = null;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
         }
 
-        function displayFallback(container) {
-            container.innerHTML = `
-                <div class="project-card" style="grid-column: 1 / -1;">
-                    <h3 class="project-title">Secure Connection Bypass Failure</h3>
-                    <p class="project-desc">Gerbang CORS Proxy pihak ketiga sedang sibuk atau melambat. Struktur data HTML dari luar gagal di-parse secara langsung saat ini.</p>
-                    <div class="project-tech"><a href="https://kenx-indie-dev.itch.io/" target="_blank">> ENTER_LAB_MANUALLY</a></div>
-                </div>
-            `;
-            updateLog("> STATUS: ERROR. TARGET DOM ACCESS OVERLOADED.");
+        function playTerminalClick(frequency = 800, duration = 0.03) {
+            initAudio();
+            if (!audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.01, audioCtx.currentTime); 
+                gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        const ARCHIVE_GAMES = [
+            { title: "C850 Found Footage Demo", link: "https://kenx-indie-dev.itch.io/c850-found-footage-demo", desc: "A narrative psychological retro experience capturing eerie atmospheric realism.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=C850_IMG" },
+            { title: "SS2D Forcethon", link: "https://kenx-indie-dev.itch.io/ss2d-forcethon", desc: "Physics-driven mechanical optimization framework mapped onto 2D space.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=SS2D_IMG" },
+            { title: "Orbiks FSS", link: "https://kenx-indie-dev.itch.io/orbiks-fss", desc: "Fast-paced local spatial engine built for vector handling architecture.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=ORBIKS_FSS" },
+            { title: "Orbiks Slayer", link: "https://kenx-indie-dev.itch.io/orbiks-slayer", desc: "Top-down shooter showcasing state machine combat logic and performance processing.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=ORBIKS_SLR" },
+            { title: "Runlike", link: "https://kenx-indie-dev.itch.io/runlike", desc: "Procedural runner experiment utilizing modular terrain loops.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=RUNLIKE" },
+            { title: "Rogue Clash: Orbiks Duels", link: "https://kenx-indie-dev.itch.io/rogue-clash-orbiks-duels", desc: "Strategic turn combat framework incorporating dynamic system parameters.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=ROGUE_CLASH" },
+            { title: "Stickman Shooter", link: "https://kenx-indie-dev.itch.io/stickman-shoter", desc: "Classic crisp 2D kinetic juice and weapon system test.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=STICKMAN" },
+            { title: "Ninja Game", link: "https://kenx-indie-dev.itch.io/ninja-game", desc: "Tilemap and precision physics processing prototype.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=NINJA" },
+            { title: "PVCIndo", link: "https://kenx-indie-dev.itch.io/pvcindo", desc: "Localized simulation mechanic experiment focusing on node management.", img: "https://placehold.co/400x250/111/0f0?font=courier&text=PVCINDO" }
+        ];
+
+        function scrapeItchGames() {
+            const container = document.getElementById("itch-projects");
+            if (ARCHIVE_GAMES.length > 0) {
+                container.innerHTML = ""; 
+                ARCHIVE_GAMES.forEach(game => {
+                    const card = document.createElement("div");
+                    card.className = "project-card";
+                    card.innerHTML = `
+                        <div class="project-image-wrapper">
+                            <img src="${game.img}" alt="${game.title}" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">> ${game.title}</h3>
+                            <p class="project-desc">${game.desc}</p>
+                            <div class="project-meta">
+                                <span class="project-tech-tag">Godot Core</span>
+                                <a href="${game.link}" target="_blank" class="launch-btn">> LAUNCH_EXE</a>
+                            </div>
+                        </div>
+                    `;
+                    card.addEventListener("mouseenter", () => {
+                        playTerminalClick(950, 0.02);
+                        updateLog(`> QUERY_LINK: MAPPING [${game.title.toUpperCase()}] SECTOR ADDRESS`);
+                    });
+                    card.addEventListener("mouseleave", resetLog);
+                    container.appendChild(card);
+                });
+                updateLog(`> STATUS: ARCHIVE MOUNTED SUCCESSFULLY. [${ARCHIVE_GAMES.length}] BLOCKS ALLOCATED.`);
+            }
         }
 
         const logStatus = document.getElementById("log-status");
-
         function updateLog(text) {
             logStatus.textContent = text;
-            logStatus.style.color = "#00ff00";
+            logStatus.style.color = "var(--terminal-green)";
         }
-
         function resetLog() {
             logStatus.textContent = "> STATUS: IDLE. INTERACTIVE MONITOR READY.";
-            logStatus.style.color = "#888888"; 
+            logStatus.style.color = "var(--text-muted)"; 
+        }
+
+        const profileAvatar = document.getElementById("profile-avatar");
+        if (profileAvatar) {
+            profileAvatar.addEventListener("mouseenter", () => {
+                playTerminalClick(750, 0.04); 
+                updateLog(`> ACCESSING_BIOMETRIC_DATA: CORE ENCRYPTED PROFILE VERIFIED.`);
+            });
+            profileAvatar.addEventListener("mouseleave", resetLog);
         }
 
         document.querySelectorAll(".skill-item").forEach(item => {
-            item.addEventListener("mouseenter", () => updateLog(`> ANALYZING_MODULE: ${item.getAttribute("data-info")}`));
+            item.addEventListener("mouseenter", () => {
+                playTerminalClick(1100, 0.02);
+                updateLog(`> ANALYZING_MODULE: ${item.getAttribute("data-info")}`);
+            });
             item.addEventListener("mouseleave", resetLog);
         });
 
         document.querySelectorAll(".contact-link").forEach(link => {
-            link.addEventListener("mouseenter", () => updateLog(`> NETWORK_LINK: READY TO INITIALIZE [${link.getAttribute("data-target").toUpperCase()}]`));
+            link.addEventListener("mouseenter", () => {
+                playTerminalClick(1300, 0.02);
+                updateLog(`> PIPELINE_READY: INITIALIZING [${link.getAttribute("data-target").toUpperCase()}]`);
+            });
             link.addEventListener("mouseleave", resetLog);
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section, header');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            let top = window.scrollY + 150;
+
+            sections.forEach(sec => {
+                let id = sec.getAttribute('id');
+                if(!id) return;
+                let offset = sec.offsetTop;
+                let height = sec.offsetHeight;
+
+                if (top >= offset && top < offset + height) {
+                    navLinks.forEach(links => {
+                        links.classList.remove('active');
+                        document.querySelector('.nav-links a[href*=' + id + ']').classList.add('active');
+                    });
+                }
+            });
         });
 
         setInterval(() => {
@@ -358,8 +715,144 @@
 
         window.onload = () => {
             typeEffect();
-            scrapeItchGames();
+            scrapeItchGames(); 
         };
+
+        window.addEventListener('click', () => {
+            initAudio();
+        }, { once: true });
+
+        const glCanvas = document.getElementById('fluid-bg');
+        const glCtx = glCanvas.getContext('webgl');
+
+        if (glCtx) {
+            const vsSource = `
+                attribute vec2 position;
+                void main() { gl_Position = vec4(position, 0.0, 1.0); }
+            `;
+            
+            const fsSource = `
+                #ifdef GL_ES
+                precision mediump float;
+                #endif
+
+                uniform vec2 u_resolution;
+                uniform float u_time;
+                uniform vec2 u_mouse;
+
+                float random(vec2 st) { return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123); }
+                float noise(vec2 st) {
+                    vec2 i = floor(st); vec2 f = fract(st);
+                    float a = random(i); float b = random(i + vec2(1.0, 0.0));
+                    float c = random(i + vec2(0.0, 1.0)); float d = random(i + vec2(1.0, 1.0));
+                    vec2 u = f*f*(3.0-2.0*f);
+                    return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+                }
+                float fbm(vec2 st) {
+                    float v = 0.0; float a = 0.5;
+                    for (int i = 0; i < 5; i++) { v += a * noise(st); st *= 2.0; a *= 0.5; }
+                    return v;
+                }
+
+                float getFluidHeight(vec2 st) {
+                    vec2 p = st * 2.2;
+                    vec2 q = vec2(fbm(p + u_time * 0.08), fbm(p + vec2(1.0)));
+                    vec2 r = vec2(fbm(p + 1.0 * q + vec2(1.7, 9.2) + u_time * 0.1), 
+                                  fbm(p + 1.0 * q + vec2(8.3, 2.8) + u_time * 0.08));
+                    vec2 mouse = u_mouse / u_resolution;
+                    mouse.x *= u_resolution.x / u_resolution.y;
+                    float mouseDist = length(st - mouse);
+                    float mouseInfluence = exp(-mouseDist * 18.0) * 0.22;
+                    return fbm(p + r + mouseInfluence);
+                }
+
+                vec3 getNormal(vec2 st) {
+                    vec2 e = vec2(0.003, 0.0);
+                    float h = getFluidHeight(st);
+                    float dx = getFluidHeight(st + e.xy) - h;
+                    float dy = getFluidHeight(st + e.yx) - h;
+                    return normalize(vec3(-dx * 15.0, -dy * 15.0, 1.0));
+                }
+
+                void main() {
+                    vec2 st = gl_FragCoord.xy / u_resolution.xy;
+                    st.x *= u_resolution.x / u_resolution.y;
+
+                    vec3 n = getNormal(st);
+                    vec3 lightDir = normalize(vec3(0.5, 0.8, 0.6));
+                    vec3 viewDir = vec3(0.0, 0.0, 1.0);
+                    vec3 halfDir = normalize(lightDir + viewDir);
+                    
+                    vec3 ambient = vec3(0.012, 0.012, 0.015);
+                    float diff = max(dot(n, lightDir), 0.0);
+                    vec3 diffuse = vec3(0.03, 0.03, 0.04) * diff;
+                    
+                    float spec = pow(max(dot(n, halfDir), 0.0), 32.0);
+                    vec3 specular = vec3(0.55, 0.62, 0.68) * spec * 1.3;
+
+                    vec2 mouse = u_mouse / u_resolution;
+                    mouse.x *= u_resolution.x / u_resolution.y;
+                    float mouseGlow = exp(-length(st - mouse) * 6.0) * 0.08;
+
+                    vec3 finalColor = ambient + diffuse + specular + vec3(0.0, 0.15, 0.05) * mouseGlow;
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }
+            `;
+
+            const vs = glCtx.createShader(glCtx.VERTEX_SHADER);
+            glCtx.shaderSource(vs, vsSource);
+            glCtx.compileShader(vs);
+
+            const fs = glCtx.createShader(glCtx.FRAGMENT_SHADER);
+            glCtx.shaderSource(fs, fsSource);
+            glCtx.compileShader(fs);
+
+            const program = glCtx.createProgram();
+            glCtx.attachShader(program, vs);
+            glCtx.attachShader(program, fs);
+            glCtx.linkProgram(program);
+            glCtx.useProgram(program);
+
+            const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]);
+            const buffer = glCtx.createBuffer();
+            glCtx.bindBuffer(glCtx.ARRAY_BUFFER, buffer);
+            glCtx.bufferData(glCtx.ARRAY_BUFFER, vertices, glCtx.STATIC_DRAW);
+
+            const pos = glCtx.getAttribLocation(program, "position");
+            glCtx.enableVertexAttribArray(pos);
+            glCtx.vertexAttribPointer(pos, 2, glCtx.FLOAT, false, 0, 0);
+
+            const uTime = glCtx.getUniformLocation(program, "u_time");
+            const uRes = glCtx.getUniformLocation(program, "u_resolution");
+            const uMouse = glCtx.getUniformLocation(program, "u_mouse");
+
+            let w = glCanvas.width = window.innerWidth;
+            let h = glCanvas.height = window.innerHeight;
+            glCtx.viewport(0, 0, w, h);
+
+            let mX = w / 2;
+            let mY = h / 2;
+
+            window.addEventListener('resize', () => {
+                w = glCanvas.width = window.innerWidth;
+                h = glCanvas.height = window.innerHeight;
+                glCtx.viewport(0, 0, w, h);
+            });
+
+            document.addEventListener('mousemove', e => {
+                mX = e.clientX;
+                mY = h - e.clientY;
+            });
+
+            function renderFluid(time) {
+                glCtx.uniform1f(uTime, time * 0.001);
+                glCtx.uniform2f(uRes, w, h);
+                glCtx.uniform2f(uMouse, mX, mY);
+                glCtx.drawArrays(glCtx.TRIANGLES, 0, 6);
+                requestAnimationFrame(renderFluid);
+            }
+            requestAnimationFrame(renderFluid);
+        }
     </script>
 </body>
 </html>

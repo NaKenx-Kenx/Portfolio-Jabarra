@@ -62,13 +62,12 @@
             pointer-events: none;
         }
 
-        /* Minimal Header Navigation */
         .nav-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(5, 5, 5, 0.8);
+            background: rgba(5, 5, 5, 0.85);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
@@ -82,11 +81,14 @@
             font-weight: bold;
             color: var(--terminal-green);
             letter-spacing: 1px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .nav-links {
             display: flex;
             gap: 1.5rem;
+            flex-shrink: 0;
         }
 
         .nav-links a {
@@ -94,6 +96,7 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
+            white-space: nowrap; 
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -193,6 +196,52 @@
             font-size: 1rem;
             color: #ccc;
             line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .stat-box {
+            border: 1px solid var(--accent-color);
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: cell;
+        }
+
+        .stat-box:hover {
+            border-color: var(--terminal-green);
+            background: rgba(0, 255, 102, 0.02);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--text-color);
+            line-height: 1;
+            font-family: monospace;
+            transition: color 0.3s ease;
+        }
+
+        .stat-box:hover .stat-number {
+            color: var(--terminal-green);
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.75rem;
         }
 
         .project-grid {
@@ -337,7 +386,7 @@
         .skill-progress-fill {
             height: 100%;
             background: var(--text-muted);
-            width: 0%;
+            width: 0%; 
             transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -396,7 +445,6 @@
             margin-left: 4px;
         }
 
-        /* Fixed System HUD */
         .system-hud {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -443,12 +491,19 @@
         }
 
         @media (max-width: 768px) {
-            .nav-bar { padding: 1rem; }
+            .nav-bar { padding: 1rem 1rem; }
             .nav-links { gap: 0.8rem; }
             .nav-links a { font-size: 0.75rem; }
             header { padding: 8rem 0 3rem 0; }
             .title { font-size: 1.8rem; }
             section { padding: 3.5rem 0; }
+        }
+
+        @media (max-width: 400px) {
+            .nav-bar { padding: 1rem 0.6rem; }
+            .nav-logo .logo-text { display: none; } 
+            .nav-links { gap: 0.5rem; }
+            .nav-links a { font-size: 0.7rem; letter-spacing: 0px; }
         }
     </style>
 </head>
@@ -457,12 +512,12 @@
     <canvas id="fluid-bg"></canvas>
 
     <nav class="nav-bar">
-        <div class="nav-logo">> KEANU.DEV</div>
+        <div class="nav-logo">> <span class="logo-text">KEANU.DEV</span></div>
         <div class="nav-links">
-            <a href="#about">// STATUS</a>
-            <a href="#projects">// ARCHIVE</a>
-            <a href="#skills">// SKILLS</a>
-            <a href="#contact">// PIPELINE</a>
+            <a href="#about">// STAT</a>
+            <a href="#projects">// ARCH</a>
+            <a href="#skills">// SKL</a>
+            <a href="#contact">// PIPE</a>
         </div>
     </nav>
 
@@ -480,6 +535,25 @@
                 </div>
                 <div class="about-text">
                     <p>I am a 15-year-old game developer and programmer focused on building high-performance systems. Operating primarily within 2D architecture optimization, procedural pipeline generation, and modular visual log logic.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box" data-info="> TOTAL_ARCHIVE: Menghitung seluruh modul dan build game publik/internal.">
+                    <div class="stat-number">9+</div>
+                    <div class="stat-label">Projects Compiled</div>
+                </div>
+                <div class="stat-box" data-info="> RUNTIME_AGE: Sistem biologis aktif sejak tahun 2011.">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Years Old Runtime</div>
+                </div>
+                <div class="stat-box" data-info="> TECH_STACK: Core tech modules yang berhasil diintegrasikan dengan stabil.">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Modules Mastered</div>
+                </div>
+                <div class="stat-box" data-info="> JUICE_RATIO: Screen-shake, trauma systems, dan dynamic physics optimization siap pakai.">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Game Feel Juice</div>
                 </div>
             </div>
         </section>
@@ -521,6 +595,24 @@
                         <div class="skill-progress-fill" style="width: 80%;"></div>
                     </div>
                 </li>
+                <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 3D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport shader.">
+                    <div class="skill-name">
+                        <span>3D Physics & Shaders</span>
+                        <span class="skill-level-text">ADVANCED (75%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 75%;"></div>
+                    </div>
+                </li>
+                <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
+                    <div class="skill-name">
+                        <span>Game UI & UX</span>
+                        <span class="skill-level-text">ADVANCED (85%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 85%;"></div>
+                    </div>
+                </li>
                 <li class="skill-item" data-info="Pemrosesan logika tingkat lanjut, manajemen data, automasi skrip, atau integrasi eksternal.">
                     <div class="skill-name">
                         <span>Python Scripting</span>
@@ -528,6 +620,15 @@
                     </div>
                     <div class="skill-progress-bg">
                         <div class="skill-progress-fill" style="width: 60%;"></div>
+                    </div>
+                </li>
+                <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
+                    <div class="skill-name">
+                        <span>Godot Networking</span>
+                        <span class="skill-level-text">STABLE (50%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 50%;"></div>
                     </div>
                 </li>
             </ul>
@@ -672,6 +773,14 @@
             profileAvatar.addEventListener("mouseleave", resetLog);
         }
 
+        document.querySelectorAll(".stat-box").forEach(box => {
+            box.addEventListener("mouseenter", () => {
+                playTerminalClick(1000, 0.02);
+                updateLog(box.getAttribute("data-info"));
+            });
+            box.addEventListener("mouseleave", resetLog);
+        });
+
         document.querySelectorAll(".skill-item").forEach(item => {
             item.addEventListener("mouseenter", () => {
                 playTerminalClick(1100, 0.02);
@@ -688,8 +797,8 @@
             link.addEventListener("mouseleave", resetLog);
         });
 
+        const sections = document.querySelectorAll('section');
         window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section, header');
             const navLinks = document.querySelectorAll('.nav-links a');
             let top = window.scrollY + 150;
 
@@ -702,7 +811,8 @@
                 if (top >= offset && top < offset + height) {
                     navLinks.forEach(links => {
                         links.classList.remove('active');
-                        document.querySelector('.nav-links a[href*=' + id + ']').classList.add('active');
+                        const targetLink = document.querySelector('.nav-links a[href*=' + id + ']');
+                        if(targetLink) targetLink.classList.add('active');
                     });
                 }
             });

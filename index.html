@@ -30,6 +30,8 @@
         #fluid-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1; pointer-events: none; display: block;
+            filter: blur(10px);
+            transform: scale(1.05);
         }
 
         body::before {
@@ -97,7 +99,6 @@
         .skill-progress-fill { height: 100%; background: var(--text-muted); width: 0%; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .skill-item:hover .skill-progress-fill { background: var(--terminal-green); box-shadow: 0 0 8px var(--terminal-green); }
 
-        /* Public Records & Related Horizontal Slider */
         .slider-container {
             display: flex;
             overflow-x: hidden; 
@@ -142,7 +143,6 @@
             transform: scale(1.02);
         }
 
-        /* Specific styles for video embeds */
         .video-card {
             height: auto;
             min-height: 380px;
@@ -151,7 +151,7 @@
         .video-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; 
             height: 0;
             background: #000;
             border-bottom: 1px solid var(--accent-color);
@@ -222,7 +222,7 @@
 
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
         .contact-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
-        .contact-item svg { color: var(--text-muted); transition: all 0.3s ease; }
+        .contact-item svg { color: var(--text-muted); transition: all 0.3s ease; flex-shrink: 0; }
         .contact-item:hover svg { color: var(--terminal-green); filter: drop-shadow(0 0 4px var(--terminal-green)); }
         a { color: var(--text-color); text-decoration: none; transition: all 0.2s ease; }
         .contact-link { border-bottom: 1px solid transparent; color: var(--text-muted); }
@@ -318,17 +318,29 @@
         <section id="skills">
             <h2>// CAPABILITY_MODULES</h2>
             <ul class="skill-list">
-                <li class="skill-item" data-info="Engine utama dengan jam terbang tinggi. Mahir arsitektur node dan optimasi scene.">
-                    <div class="skill-name"><span>Godot Engine</span><span class="skill-level-text">MASTERED</span></div>
+                <li class="skill-item" data-info="Engine utama dengan jam terbang tinggi. Mahir arsitektur node, optimasi struktur scene, penanganan sinyal, dan performa runtime 2D.">
+                    <div class="skill-name"><span>Godot Engine (4.x)</span><span class="skill-level-text">EXPERT</span></div>
                     <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div></div>
                 </li>
-                <li class="skill-item" data-info="Sangat menguasai siklus hidup skrip, sinyal bawaan, static typing, dan sistem runtime.">
-                    <div class="skill-name"><span>GDScript</span><span class="skill-level-text">MASTERED</span></div>
+                <li class="skill-item" data-info="Sangat menguasai siklus hidup skrip, static typing untuk optimasi memori, manajemen inventori kompleks, hingga AI agent training.">
+                    <div class="skill-name"><span>GDScript & Logic System</span><span class="skill-level-text">EXPERT</span></div>
                     <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div></div>
                 </li>
-                <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 2D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport shader.">
-                    <div class="skill-name"><span>2D Physics & Shaders</span><span class="skill-level-text">ADVANCED (80%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 80%;"></div></div>
+                <li class="skill-item" data-info="Spesialisasi shader visual kustom untuk estetika retro/modern: Dithering, CRT distortion, glitch effects, dan glossy glint.">
+                    <div class="skill-name"><span>Custom 2D Shaders</span><span class="skill-level-text">ADVANCED (90%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%;"></div></div>
+                </li>
+                <li class="skill-item" data-info="Ahli dalam merancang 'game feel' mekanik tingkat tinggi: Trauma-based screen shake, dynamic cursor effects dengan trails, dan sistem umpan balik 'jelly'.">
+                    <div class="skill-name"><span>Game Feel & Juice Mechanics</span><span class="skill-level-text">EXPERT</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div></div>
+                </li>
+                <li class="skill-item" data-info="Penyusunan generator deskripsi prosedural, penanganan relasi database kartu/alat secara modular, serta arsitektur logika game taktis.">
+                    <div class="skill-name"><span>Procedural & Data Logic</span><span class="skill-level-text">ADVANCED (85%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 85%;"></div></div>
+                </li>
+                <li class="skill-item" data-info="Perancangan aset pixel art (32x32) terukur serta interior background dengan pendekatan garis wobbly/doodle yang khas.">
+                    <div class="skill-name"><span>Pixel Art & UI Aesthetics</span><span class="skill-level-text">INTERMEDIATE (75%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 75%;"></div></div>
                 </li>
             </ul>
         </section>
@@ -412,6 +424,10 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                     <a href="https://www.youtube.com/@Jabarras-gd" target="_blank" class="contact-link" data-target="YouTube Channel">@Jabarras-gd</a>
                 </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7H5l7 7Z"/><path d="m12 12 5-5H7l5 5Z"/><path d="m12 6 3-3H9l3 3Z"/><path d="M12 19v3"/></svg>
+                    <a href="https://nakenx-kenx.github.io/jabarras/" target="_blank" class="contact-link" data-target="Jabarras Linktree Node">more..</a>
+                </div>
             </div>
         </section>
 
@@ -447,17 +463,20 @@
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
         }
 
         function playTerminalClick(frequency = 800, duration = 0.03) {
             initAudio();
-            if (!audioCtx) return;
+            if (!audioCtx || audioCtx.state === 'suspended') return;
             try {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.01, audioCtx.currentTime); 
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime); 
                 gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
@@ -562,7 +581,15 @@
             card.addEventListener("mouseleave", resetLog);
         });
 
-        // Initialize Sliders
+        document.querySelectorAll(".skill-item").forEach(item => {
+            item.addEventListener("mouseenter", () => {
+                playTerminalClick(1100, 0.02);
+                const info = item.getAttribute("data-info");
+                updateLog(`> SKILL_INFO: ${info}`);
+            });
+            item.addEventListener("mouseleave", resetLog);
+        });
+
         function initSlider(sliderId, prevBtnId, nextBtnId) {
             const container = document.getElementById(sliderId);
             const prevBtn = document.getElementById(prevBtnId);
@@ -596,11 +623,16 @@
             initSlider('related-slider', 'rel-prev-btn', 'rel-next-btn');
         };
 
-        window.addEventListener('click', () => {
+        const unlockAudio = () => {
             initAudio();
-        }, { once: true });
+            if (audioCtx && audioCtx.state === 'running') {
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('keydown', unlockAudio);
+            }
+        };
+        window.addEventListener('click', unlockAudio);
+        window.addEventListener('keydown', unlockAudio);
 
-        // WEBGL FLUID SHADER BACKGROUND
         const glCanvas = document.getElementById('fluid-bg');
         const glCtx = glCanvas.getContext('webgl');
 

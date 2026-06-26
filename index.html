@@ -27,11 +27,13 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* BACKLIT GRID BACKGROUND WITH 2.5% BLUR FOCUS */
         #fluid-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1; pointer-events: none; display: block;
-            filter: blur(10px);
-            transform: scale(1.05);
+            filter: blur(12px);
+            transform: scale(1.04);
+            opacity: 0.85;
         }
 
         body::before {
@@ -84,26 +86,10 @@
         .project-card:hover .project-image { filter: grayscale(0%) brightness(1px); transform: scale(1.05); }
         
         .project-tag {
-            position: absolute;
-            right: 5px;
-            top: 10px;
-            font-size: 0.65rem;
-            font-weight: bold;
-            padding: 2px 8px;
-            letter-spacing: 1px;
-            z-index: 5;
-            text-transform: uppercase;
+            position: absolute; right: 5px; top: 10px; font-size: 0.65rem; font-weight: bold; padding: 2px 8px; letter-spacing: 1px; z-index: 5; text-transform: uppercase;
         }
-        .project-tag.hot {
-            background: var(--terminal-amber);
-            color: var(--bg-color);
-            box-shadow: 0 0 10px rgba(255, 170, 0, 0.4);
-        }
-        .project-tag.should-try {
-            background: var(--terminal-green);
-            color: var(--bg-color);
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
-        }
+        .project-tag.hot { background: var(--terminal-amber); color: var(--bg-color); box-shadow: 0 0 10px rgba(255, 170, 0, 0.4); }
+        .project-tag.should-try { background: var(--terminal-green); color: var(--bg-color); box-shadow: 0 0 10px rgba(0, 255, 102, 0.4); }
 
         .project-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
         .project-title { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-color); }
@@ -122,130 +108,29 @@
         .skill-progress-fill { height: 100%; background: var(--text-muted); width: 0%; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .skill-item:hover .skill-progress-fill { background: var(--terminal-green); box-shadow: 0 0 8px var(--terminal-green); }
 
-        .slider-container {
-            display: flex;
-            overflow-x: hidden; 
-            gap: 1.5rem;
-            padding-bottom: 1.5rem;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-        }
+        .slider-container { display: flex; overflow-x: hidden; gap: 1.5rem; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; scrollbar-width: none; }
         .slider-container::-webkit-scrollbar { display: none; }
         
         .record-card {
-            flex: 0 0 340px;
-            height: 480px;
-            border: 1px solid var(--accent-color);
-            background: var(--card-bg);
-            backdrop-filter: blur(4px);
-            display: flex;
-            flex-direction: column;
-            scroll-snap-align: start;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            overflow: hidden;
+            flex: 0 0 340px; height: 480px; border: 1px solid var(--accent-color); background: var(--card-bg); backdrop-filter: blur(4px); display: flex; flex-direction: column; scroll-snap-align: start; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; overflow: hidden;
         }
-        .record-card:hover { 
-            border-color: var(--terminal-green); 
-            background: rgba(20, 20, 20, 0.9); 
-            transform: translateY(-4px); 
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 255, 102, 0.1); 
-        }
+        .record-card:hover { border-color: var(--terminal-green); background: rgba(20, 20, 20, 0.9); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 255, 102, 0.1); }
+        .record-image { width: 100%; height: 160px; background-size: cover; background-position: center; border-bottom: 1px solid var(--accent-color); filter: grayscale(100%) brightness(0.7); transition: all 0.5s ease; }
+        .record-card:hover .record-image { filter: grayscale(0%) brightness(1); transform: scale(1.02); }
 
-        .record-image {
-            width: 100%;
-            height: 160px;
-            background-size: cover;
-            background-position: center;
-            border-bottom: 1px solid var(--accent-color);
-            filter: grayscale(100%) brightness(0.7);
-            transition: all 0.5s ease;
-        }
-        .record-card:hover .record-image {
-            filter: grayscale(0%) brightness(1);
-            transform: scale(1.02);
-        }
+        .video-card { height: auto; min-height: 380px; cursor: default; }
+        .video-wrapper { position: relative; width: 100%; background: #000; border-bottom: 1px solid var(--accent-color); overflow: hidden; aspect-ratio: 16 / 9; }
+        .video-wrapper.vertical { aspect-ratio: 9 / 16; max-height: 400px; display: flex; justify-content: center; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        .video-card {
-            height: auto;
-            min-height: 380px;
-            cursor: default;
-        }
-
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border-bottom: 1px solid var(--accent-color);
-            overflow: hidden;
-            aspect-ratio: 16 / 9; 
-        }
+        .record-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .record-text { font-size: 0.8rem; color: #d0d0d0; line-height: 1.6; font-style: italic; margin-bottom: 1rem; }
+        .record-meta { margin-top: auto; border-top: 1px dashed var(--accent-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .record-author { font-size: 0.75rem; font-weight: bold; color: var(--terminal-green); display: flex; align-items: center; gap: 8px; }
+        .record-author::before { content: ""; display: block; width: 8px; height: 8px; background: var(--terminal-green); opacity: 0.5; flex-shrink: 0; }
         
-        .video-wrapper.vertical {
-            aspect-ratio: 9 / 16;
-            max-height: 400px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .record-content {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .record-text { 
-            font-size: 0.8rem; 
-            color: #d0d0d0; 
-            line-height: 1.6; 
-            font-style: italic; 
-            margin-bottom: 1rem;
-        }
-        .record-meta {
-            margin-top: auto;
-            border-top: 1px dashed var(--accent-color); 
-            padding-top: 1rem; 
-            display: flex; 
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .record-author { 
-            font-size: 0.75rem; 
-            font-weight: bold; 
-            color: var(--terminal-green); 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-        }
-        .record-author::before { 
-            content: ""; display: block; width: 8px; height: 8px; background: var(--terminal-green); opacity: 0.5; flex-shrink: 0; 
-        }
-        
-        .click-hint {
-            align-self: flex-start;
-            font-size: 0.65rem;
-            color: var(--bg-color);
-            background: var(--text-muted);
-            padding: 4px 10px;
-            border-radius: 2px;
-            letter-spacing: 0.5px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        .record-card:hover .click-hint {
-            background: var(--terminal-green);
-            color: var(--bg-color);
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
-        }
+        .click-hint { align-self: flex-start; font-size: 0.65rem; color: var(--bg-color); background: var(--text-muted); padding: 4px 10px; border-radius: 2px; letter-spacing: 0.5px; font-weight: bold; transition: all 0.3s ease; }
+        .record-card:hover .click-hint { background: var(--terminal-green); color: var(--bg-color); box-shadow: 0 0 10px rgba(0, 255, 102, 0.4); }
 
         .slider-controls { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
         .slider-btn { background: transparent; color: var(--text-color); border: 1px solid var(--accent-color); padding: 0.6rem 1.5rem; font-family: inherit; font-size: 0.8rem; cursor: pointer; letter-spacing: 1px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -262,9 +147,7 @@
         .cursor { display: inline-block; width: 8px; height: 1.2em; background-color: var(--terminal-green); animation: blink 0.8s infinite; vertical-align: middle; margin-left: 4px; }
         
         .system-hud {
-            position: fixed; bottom: 0; left: 0; right: 0; background: #030303; border-top: 1px solid var(--accent-color);
-            padding: 0.6rem 2rem; font-size: 0.75rem; color: var(--text-muted); z-index: 10000;
-            display: flex; justify-content: space-between; align-items: center;
+            position: fixed; bottom: 0; left: 0; right: 0; background: #030303; border-top: 1px solid var(--accent-color); padding: 0.6rem 2rem; font-size: 0.75rem; color: var(--text-muted); z-index: 10000; display: flex; justify-content: space-between; align-items: center;
         }
         #log-status { font-family: monospace; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 70%; }
         #hud-clock { color: var(--text-color); letter-spacing: 1px; }
@@ -348,94 +231,44 @@
             <h2>// CAPABILITY_MODULES</h2>
             <ul class="skill-list">
                 <li class="skill-item" data-info="Engine utama dengan jam terbang tinggi. Mahir arsitektur node dan optimasi scene.">
-                    <div class="skill-name">
-                        <span>Godot Engine</span>
-                        <span class="skill-level-text">MASTERED</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div>
-                    </div>
+                    <div class="skill-name"><span>Godot Engine</span><span class="skill-level-text">MASTERED</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div></div>
                 </li>
                 <li class="skill-item" data-info="Sangat menguasai siklus hidup skrip, sinyal bawaan, static typing, dan sistem runtime.">
-                    <div class="skill-name">
-                        <span>GDScript</span>
-                        <span class="skill-level-text">MASTERED</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div>
-                    </div>
+                    <div class="skill-name"><span>GDScript</span><span class="skill-level-text">MASTERED</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div></div>
                 </li>
                 <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 2D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport shader.">
-                    <div class="skill-name">
-                        <span>2D Physics & Shaders</span>
-                        <span class="skill-level-text">ADVANCED (80%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 80%;"></div>
-                    </div>
+                    <div class="skill-name"><span>2D Physics & Shaders</span><span class="skill-level-text">ADVANCED (80%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 80%;"></div></div>
                 </li>
                 <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 3D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport shader.">
-                    <div class="skill-name">
-                        <span>3D Physics & Shaders</span>
-                        <span class="skill-level-text">ADVANCED (75%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 75%;"></div>
-                    </div>
+                    <div class="skill-name"><span>3D Physics & Shaders</span><span class="skill-level-text">ADVANCED (75%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 75%;"></div></div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name">
-                        <span>Game UI & UX</span>
-                        <span class="skill-level-text">ADVANCED (85%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 85%;"></div>
-                    </div>
+                    <div class="skill-name"><span>Game UI & UX</span><span class="skill-level-text">ADVANCED (85%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 85%;"></div></div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name">
-                        <span>Game Feel & Juice</span>
-                        <span class="skill-level-text">ADVANCED (90%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 90%;"></div>
-                    </div>
+                    <div class="skill-name"><span>Game Feel & Juice</span><span class="skill-level-text">ADVANCED (90%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%;"></div></div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika tingkat lanjut, manajemen data, automasi skrip, atau integrasi eksternal.">
-                    <div class="skill-name">
-                        <span>Python Scripting</span>
-                        <span class="skill-level-text">STABLE (60%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 60%;"></div>
-                    </div>
+                    <div class="skill-name"><span>Python Scripting</span><span class="skill-level-text">STABLE (60%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 60%;"></div></div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name">
-                        <span>Godot Networking</span>
-                        <span class="skill-level-text">STABLE (50%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 50%;"></div>
-                    </div>
+                    <div class="skill-name"><span>Godot Networking</span><span class="skill-level-text">STABLE (50%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 50%;"></div></div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name">
-                        <span>Web Front-End</span>
-                        <span class="skill-level-text">STABLE (37.5%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width:37.5%;"></div>
-                    </div>
+                    <div class="skill-name"><span>Web Front-End</span><span class="skill-level-text">STABLE (37.5%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width:37.5%;"></div></div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name">
-                        <span>Web Back-End</span>
-                        <span class="skill-level-text">STABLE (42.5%)</span>
-                    </div>
-                    <div class="skill-progress-bg">
-                        <div class="skill-progress-fill" style="width: 42.5%;"></div>
-                    </div>
+                    <div class="skill-name"><span>Web Back-End</span><span class="skill-level-text">STABLE (42.5%)</span></div>
+                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 42.5%;"></div></div>
                 </li>
             </ul>
         </section>
@@ -489,7 +322,7 @@
             <h2>// RELATED_MEDIA [REMOTE_JSON_FETCH]</h2>
             <div class="slider-container" id="related-slider">
                 <p class="loading-text" id="related-loading">> MOUNTING_RELATED_MEDIA... FETCHING_JSON_DATA...</p>
-                </div>
+            </div>
             <div class="slider-controls" id="related-controls" style="display: none;">
                 <button id="rel-prev-btn" class="slider-btn">&lt; PREV_VID</button>
                 <button id="rel-next-btn" class="slider-btn">NEXT_VID &gt;</button>
@@ -580,7 +413,6 @@
             } catch(e) {}
         }
 
-
         const ARCHIVE_GAMES = [
             { title: "C850 Found Footage Demo", link: "https://kenx-indie-dev.itch.io/c850-found-footage-demo", desc: "A narrative psychological retro experience capturing eerie atmospheric realism.", img: "https://img.itch.zone/aW1nLzI3ODk4NzM5LnBuZw==/315x250%23c/hJ0S7I.png", tag: "HOT" },
             { title: "SS2D Forcethon", link: "https://kenx-indie-dev.itch.io/ss2d-forcethon", desc: "Physics-driven mechanical optimization framework mapped onto 2D space.", img: "https://img.itch.zone/aW1nLzI3NDExNDc5LnBuZw==/315x250%23c/LJX5Un.png", tag: "Should Try" },
@@ -600,25 +432,17 @@
                 ARCHIVE_GAMES.forEach(game => {
                     const card = document.createElement("div");
                     card.className = "project-card";
-                    
                     let tagHTML = "";
                     if (game.tag) {
                         const tagClass = game.tag.toLowerCase() === "hot" ? "project-tag hot" : "project-tag should-try";
                         tagHTML = `<div class="${tagClass}">${game.tag}</div>`;
                     }
-
                     card.innerHTML = `
-                        <div class="project-image-wrapper">
-                            ${tagHTML}
-                            <img src="${game.img}" alt="${game.title}" class="project-image">
-                        </div>
+                        <div class="project-image-wrapper">${tagHTML}<img src="${game.img}" alt="${game.title}" class="project-image"></div>
                         <div class="project-content">
                             <h3 class="project-title">> ${game.title}</h3>
                             <p class="project-desc">${game.desc}</p>
-                            <div class="project-meta">
-                                <span class="project-tech-tag">Godot Core</span>
-                                <a href="${game.link}" target="_blank" class="launch-btn">> LAUNCH_EXE</a>
-                            </div>
+                            <div class="project-meta"><span class="project-tech-tag">Godot Core</span><a href="${game.link}" target="_blank" class="launch-btn">> LAUNCH_EXE</a></div>
                         </div>
                     `;
                     card.addEventListener("mouseenter", () => {
@@ -631,78 +455,54 @@
             }
         }
 
-     
         async function fetchRelatedVideos() {
             const container = document.getElementById('related-slider');
             const loading = document.getElementById('related-loading');
             const controls = document.getElementById('related-controls');
-            
             try {
                 const response = await fetch('related.json');
                 if (!response.ok) throw new Error('File not found');
                 const data = await response.json();
-                
                 loading.style.display = 'none';
                 controls.style.display = 'flex';
-                
                 data.forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'record-card video-card';
-                    
                     let embedUrl = "";
                     let platformLabel = "EMBED / MEDIA";
                     let isVertical = false;
-
                     const sourceUrl = item.url || item.videoId || ""; 
-
-                 
                     if (sourceUrl.includes("youtube.com/shorts/") || item.type === "shorts") {
                         const id = sourceUrl.split("/shorts/")[1]?.split("?")[0] || item.videoId;
                         embedUrl = `https://www.youtube.com/embed/${id}`;
                         platformLabel = "YOUTUBE SHORTS";
                         isVertical = true;
-                    } 
-           
-                    else if (sourceUrl.includes("youtube.com") || sourceUrl.includes("youtu.be") || item.type === "youtube") {
+                    } else if (sourceUrl.includes("youtube.com") || sourceUrl.includes("youtu.be") || item.type === "youtube") {
                         const id = sourceUrl.includes("watch?v=") ? sourceUrl.split("v=")[1]?.split("&")[0] : (sourceUrl.split("/").pop() || item.videoId);
                         embedUrl = `https://www.youtube.com/embed/${id}`;
                         platformLabel = "YOUTUBE VIDEO";
-                    } 
-              
-                    else if (sourceUrl.includes("instagram.com/reel/") || item.type === "instagram") {
+                    } else if (sourceUrl.includes("instagram.com/reel/") || item.type === "instagram") {
                         const cleanUrl = sourceUrl.split("?")[0].replace(/\/$/, "");
                         embedUrl = `${cleanUrl}/embed/`;
                         platformLabel = "INSTAGRAM REEL";
                         isVertical = true;
-                    } 
-           
-                    else if (sourceUrl.includes("tiktok.com") || item.type === "tiktok") {
+                    } else if (sourceUrl.includes("tiktok.com") || item.type === "tiktok") {
                         const id = sourceUrl.split("/video/")[1]?.split("?")[0];
                         embedUrl = id ? `https://www.tiktok.com/embed/v2/${id}` : sourceUrl;
                         platformLabel = "TIKTOK REEL";
                         isVertical = true;
-                    } 
-        
-                    else {
+                    } else {
                         embedUrl = `https://www.youtube.com/embed/${sourceUrl}`;
                         platformLabel = "YOUTUBE / EMBED";
                     }
-
-         
                     const wrapperClass = isVertical ? "video-wrapper vertical" : "video-wrapper";
-
                     card.innerHTML = `
-                        <div class="${wrapperClass}">
-                            <iframe src="${embedUrl}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="${wrapperClass}"><iframe src="${embedUrl}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
                         <div class="record-content">
                             <h3 class="project-title" style="margin-top: 0.5rem; font-size: 1rem;">> ${item.title}</h3>
-                            <div class="record-meta" style="margin-top: auto;">
-                                <span class="record-author">${platformLabel}</span>
-                            </div>
+                            <div class="record-meta" style="margin-top: auto;"><span class="record-author">${platformLabel}</span></div>
                         </div>
                     `;
-                    
                     card.addEventListener("mouseenter", () => {
                         playTerminalClick(1050, 0.02);
                         updateLog(`> VIDEO_STREAM: INITIALIZING MEDIA [${item.title.toUpperCase()}]`);
@@ -713,7 +513,6 @@
             } catch (error) {
                 loading.textContent = '> ERROR: RELATED_JSON_FILE_MISSING_OR_CORRUPT';
                 loading.style.color = '#ff3333';
-                console.warn('Could not load related.json. Ensure file exists and server is running.', error);
             }
         }
 
@@ -748,7 +547,6 @@
             const container = document.getElementById(sliderId);
             const prevBtn = document.getElementById(prevBtnId);
             const nextBtn = document.getElementById(nextBtnId);
-
             if (container && prevBtn && nextBtn) {
                 const scrollAmount = 364; 
                 prevBtn.addEventListener('click', () => {
@@ -788,7 +586,7 @@
         window.addEventListener('keydown', unlockAudio);
 
         // ==========================================
-        // OPTIMIZED WEBGL FLUID BACKGROUND SHADER
+        // HIGH PERFORMANCE WEBGL BACKLIT GRID SHADER
         // ==========================================
         const glCanvas = document.getElementById('fluid-bg');
         const glCtx = glCanvas.getContext('webgl');
@@ -799,46 +597,49 @@
                 #ifdef GL_ES
                 precision mediump float;
                 #endif
-                uniform vec2 u_resolution; uniform float u_time; uniform vec2 u_mouse;
-                float random(vec2 st) { return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123); }
-                float noise(vec2 st) {
-                    vec2 i = floor(st); vec2 f = fract(st);
-                    float a = random(i); float b = random(i + vec2(1.0, 0.0));
-                    float c = random(i + vec2(0.0, 1.0)); float d = random(i + vec2(1.0, 1.0));
-                    vec2 u = f*f*(3.0-2.0*f);
-                    return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-                }
-                // OPTIMIZED: Iterasi diturunkan dari 5 ke 3 (hemat ~40% kalkulasi per fbm)
-                float fbm(vec2 st) {
-                    float v = 0.0; float a = 0.5;
-                    for (int i = 0; i < 3; i++) { v += a * noise(st); st *= 2.0; a *= 0.5; }
-                    return v;
-                }
-                // OPTIMIZED: Pergeseran domain q & r disederhanakan pakai noise standar daripada FBM berat
-                float getFluidHeight(vec2 st) {
-                    vec2 p = st * 2.2;
-                    vec2 q = vec2(noise(p + u_time * 0.08), noise(p + vec2(1.0)));
-                    vec2 r = vec2(noise(p + q * 1.0 + vec2(1.7, 9.2) + u_time * 0.1), noise(p + q * 1.0 + vec2(8.3, 2.8) + u_time * 0.08));
-                    vec2 mouse = u_mouse / u_resolution; mouse.x *= u_resolution.x / u_resolution.y;
-                    float mouseDist = length(st - mouse); float mouseInfluence = exp(-mouseDist * 18.0) * 0.22;
-                    return fbm(p + r + mouseInfluence);
-                }
-                vec3 getNormal(vec2 st) {
-                    vec2 e = vec2(0.005, 0.0); float h = getFluidHeight(st);
-                    float dx = getFluidHeight(st + e.xy) - h; float dy = getFluidHeight(st + e.yx) - h;
-                    return normalize(vec3(-dx * 12.0, -dy * 12.0, 1.0));
-                }
+                uniform vec2 u_resolution; 
+                uniform float u_time; 
+                uniform vec2 u_mouse;
+
                 void main() {
-                    vec2 st = gl_FragCoord.xy / u_resolution.xy; st.x *= u_resolution.x / u_resolution.y;
-                    vec3 n = getNormal(st); vec3 lightDir = normalize(vec3(0.5, 0.8, 0.6)); vec3 viewDir = vec3(0.0, 0.0, 1.0);
-                    vec3 halfDir = normalize(lightDir + viewDir);
-                    vec3 ambient = vec3(0.012, 0.012, 0.015); float diff = max(dot(n, lightDir), 0.0);
-                    vec3 diffuse = vec3(0.03, 0.03, 0.04) * diff;
-                    float spec = pow(max(dot(n, halfDir), 0.0), 32.0); vec3 specular = vec3(0.55, 0.62, 0.68) * spec * 1.3;
-                    vec2 mouse = u_mouse / u_resolution; mouse.x *= u_resolution.x / u_resolution.y;
-                    float mouseGlow = exp(-length(st - mouse) * 6.0) * 0.08;
-                    vec3 finalColor = ambient + diffuse + specular + vec3(0.0, 0.15, 0.05) * mouseGlow;
-                    gl_FragColor = vec4(finalColor, 1.0);
+                    vec2 st = gl_FragCoord.xy / u_resolution.xy;
+                    st.x *= u_resolution.x / u_resolution.y;
+
+                    // Grid layout setting (skala kerapihan kotak)
+                    float gridScale = 22.0;
+                    vec2 gridSt = st * gridScale;
+                    vec2 fpos = fract(gridSt);
+
+                    // Menghitung garis tepi grid setipis mungkin
+                    float thickness = 0.04;
+                    vec2 bl = smoothstep(vec2(0.0), vec2(thickness), fpos);
+                    vec2 tr = smoothstep(vec2(0.0), vec2(thickness), 1.0 - fpos);
+                    float isLine = 1.0 - (bl.x * bl.y * tr.x * tr.y);
+
+                    // Konfigurasi koordinat lampu latar otomatis & interaksi mouse
+                    vec2 mouse = u_mouse / u_resolution;
+                    mouse.x *= u_resolution.x / u_resolution.y;
+                    
+                    // Pola gerak 2 titik lampu sorot dari belakang grid
+                    vec2 light1 = vec2(0.5 + 0.35 * sin(u_time * 0.4), 0.5 + 0.25 * cos(u_time * 0.6));
+                    vec2 light2 = vec2(0.4 + 0.25 * cos(u_time * 0.5), 0.4 + 0.30 * sin(u_time * 0.3));
+                    
+                    // Kalkulasi radius pancaran sorot lampu latar
+                    float glowMouse = exp(-length(st - mouse) * 7.5) * 1.2;
+                    float glow1 = exp(-length(st - light1) * 3.5) * 0.9;
+                    float glow2 = exp(-length(st - light2) * 4.5) * 0.8;
+                    float totalGlow = glowMouse + glow1 + glow2;
+
+                    // Definisi palet warna sistem
+                    vec3 darkBg = vec3(0.015, 0.015, 0.018);       // Isian dalam kotak tetap gelap gulita
+                    vec3 dimLineColor = vec3(0.04, 0.06, 0.04);     // Garis grid default saat tidak kena lampu
+                    vec3 brightGlowColor = vec3(0.0, 1.0, 0.4);    // Sinar Lampu Hijau Terminal murni
+
+                    // Mengawinkan warna lampu HANYA pada garis sisi yang terbidik cahaya
+                    vec3 lineFinalColor = mix(dimLineColor, brightGlowColor, min(totalGlow, 1.0));
+                    vec3 finalOutput = mix(darkBg, lineFinalColor, isLine);
+
+                    gl_FragColor = vec4(finalOutput, 1.0);
                 }
             `;
             const vs = glCtx.createShader(glCtx.VERTEX_SHADER); glCtx.shaderSource(vs, vsSource); glCtx.compileShader(vs);
@@ -849,8 +650,7 @@
             const pos = glCtx.getAttribLocation(program, "position"); glCtx.enableVertexAttribArray(pos); glCtx.vertexAttribPointer(pos, 2, glCtx.FLOAT, false, 0, 0);
             const uTime = glCtx.getUniformLocation(program, "u_time"); const uRes = glCtx.getUniformLocation(program, "u_resolution"); const uMouse = glCtx.getUniformLocation(program, "u_mouse");
             
-            // OPTIMIZED: RenderScale diset ke 0.5 (memotong 75% total beban piksel canvas)
-            const renderScale = 0.5;
+            const renderScale = 0.5; // Mengoptimalkan beban piksel GPU
             let w = glCanvas.width = Math.floor(window.innerWidth * renderScale); 
             let h = glCanvas.height = Math.floor(window.innerHeight * renderScale); 
             glCtx.viewport(0, 0, w, h);
@@ -865,11 +665,11 @@
                 mX = e.clientX * renderScale; 
                 mY = h - (e.clientY * renderScale); 
             });
-            function renderFluid(time) {
+            function renderGrid(time) {
                 glCtx.uniform1f(uTime, time * 0.001); glCtx.uniform2f(uRes, w, h); glCtx.uniform2f(uMouse, mX, mY);
-                glCtx.drawArrays(glCtx.TRIANGLES, 0, 6); requestAnimationFrame(renderFluid);
+                glCtx.drawArrays(glCtx.TRIANGLES, 0, 6); requestAnimationFrame(renderGrid);
             }
-            requestAnimationFrame(renderFluid);
+            requestAnimationFrame(renderGrid);
         }
     </script>
 </body>

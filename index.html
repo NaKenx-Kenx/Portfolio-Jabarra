@@ -69,6 +69,8 @@
         .profile-wrapper { position: relative; }
         .profile-img { width: 130px; height: 130px; object-fit: cover; border: 1px solid var(--accent-color); filter: grayscale(100%) contrast(110%); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; display: block; }
         .profile-img:hover { filter: grayscale(0%) contrast(100%); border-color: var(--terminal-green); box-shadow: 0 0 20px rgba(0, 255, 102, 0.2); }
+        .profile-img-l { margin-left:auto; margin-right:auto; width: 50%; height: 50%; object-fit: cover; border: 1px solid var(--accent-color); filter: grayscale(100%) contrast(120%); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; display: block; }
+        .profile-img-l:hover { filter: grayscale(0%) contrast(100%); border-color: var(--terminal-green); box-shadow: 0 0 20px rgba(0, 255, 102, 0.2); }
         .about-text { flex: 1; min-width: 280px; font-size: 1rem; color: #ccc; line-height: 1.8; }
 
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 3rem; width: 100%; }
@@ -85,6 +87,7 @@
         .project-image { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.8); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .project-card:hover .project-image { filter: grayscale(0%) brightness(1px); transform: scale(1.05); }
         
+        /* TAG STYLES */
         .project-tag {
             position: absolute; right: 5px; top: 10px; font-size: 0.65rem; font-weight: bold; padding: 2px 8px; letter-spacing: 1px; z-index: 5; text-transform: uppercase;
         }
@@ -111,9 +114,7 @@
         .slider-container { display: flex; overflow-x: hidden; gap: 1.5rem; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; scrollbar-width: none; }
         .slider-container::-webkit-scrollbar { display: none; }
         
-        .record-card {
-            flex: 0 0 340px; height: 480px; border: 1px solid var(--accent-color); background: var(--card-bg); backdrop-filter: blur(4px); display: flex; flex-direction: column; scroll-snap-align: start; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; overflow: hidden;
-        }
+        .record-card { flex: 0 0 340px; height: 480px; border: 1px solid var(--accent-color); background: var(--card-bg); backdrop-filter: blur(4px); display: flex; flex-direction: column; scroll-snap-align: start; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; overflow: hidden; }
         .record-card:hover { border-color: var(--terminal-green); background: rgba(20, 20, 20, 0.9); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 255, 102, 0.1); }
         .record-image { width: 100%; height: 160px; background-size: cover; background-position: center; border-bottom: 1px solid var(--accent-color); filter: grayscale(100%) brightness(0.7); transition: all 0.5s ease; }
         .record-card:hover .record-image { filter: grayscale(0%) brightness(1); transform: scale(1.02); }
@@ -136,6 +137,24 @@
         .slider-btn { background: transparent; color: var(--text-color); border: 1px solid var(--accent-color); padding: 0.6rem 1.5rem; font-family: inherit; font-size: 0.8rem; cursor: pointer; letter-spacing: 1px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         .slider-btn:hover { border-color: var(--terminal-green); color: var(--terminal-green); box-shadow: 0 0 12px rgba(0, 255, 102, 0.2); background: rgba(0, 255, 102, 0.02); }
 
+        /* ==========================================
+           CONNECTED NODES / LOGO GRID CSS
+           ========================================== */
+        .logo-grid { 
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; 
+            gap: 0.0625rem; padding: 0.25rem; 
+            background: rgba(10, 10, 10, 0.3); border: 1px dashed var(--accent-color); 
+        }
+        .affiliated-logo { 
+            max-width: 140px; max-height: 70px; object-fit: contain; 
+            filter: grayscale(100%) opacity(0.5) contrast(120%); 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: crosshair; 
+        }
+        .affiliated-logo:hover { 
+            filter: grayscale(0%) opacity(1) contrast(100%) drop-shadow(0 0 12px rgba(0, 255, 102, 0.5)); 
+            transform: scale(1.1) translateY(-4px); 
+        }
+
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
         .contact-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
         .contact-item svg { color: var(--text-muted); transition: all 0.3s ease; flex-shrink: 0; }
@@ -146,6 +165,70 @@
 
         .cursor { display: inline-block; width: 8px; height: 1.2em; background-color: var(--terminal-green); animation: blink 0.8s infinite; vertical-align: middle; margin-left: 4px; }
         
+        /* CHATBOT AI MODULE */
+        .chatbot-fab { position: fixed; bottom: 65px; right: 2rem; width: 50px; height: 50px; background: var(--card-bg); border: 1px solid var(--terminal-green); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 9999; box-shadow: 0 0 15px rgba(0, 255, 102, 0.2); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(4px); }
+        .chatbot-fab:hover { background: rgba(0, 255, 102, 0.1); transform: scale(1.1); box-shadow: 0 0 20px rgba(0, 255, 102, 0.4); }
+        .chatbot-fab svg { color: var(--terminal-green); width: 24px; height: 24px; animation: pulse 2s infinite; }
+        
+        .chatbot-window { position: fixed; bottom: 125px; right: 2rem; width: 320px; height: 420px; background: rgba(5, 5, 5, 0.95); border: 1px solid var(--accent-color); z-index: 9998; display: none; flex-direction: column; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 255, 102, 0.5); backdrop-filter: blur(8px); }
+        .chatbot-window.active { display: flex; animation: bootUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes bootUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        
+        .chat-header { padding: 1rem; border-bottom: 1px dashed var(--accent-color); font-size: 0.85rem; color: var(--terminal-green); font-weight: bold; display: flex; justify-content: space-between; align-items: center; background: rgba(0,255,102,0.02); }
+        .chat-close { cursor: pointer; color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s; }
+        .chat-close:hover { color: var(--terminal-amber); }
+        
+        .chat-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem; scrollbar-width: thin; scrollbar-color: var(--accent-color) transparent; }
+        .chat-msg { font-size: 0.75rem; padding: 10px 14px; max-width: 85%; line-height: 1.6; word-wrap: break-word; }
+        .msg-bot { background: rgba(0, 255, 102, 0.05); border: 1px solid rgba(0, 255, 102, 0.2); align-self: flex-start; color: var(--text-color); border-left: 3px solid var(--terminal-green); }
+        .msg-user { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--accent-color); align-self: flex-end; color: var(--text-muted); border-right: 3px solid var(--text-muted); }
+        
+        .chat-input-area { display: flex; padding: 0.8rem; border-top: 1px dashed var(--accent-color); background: #030303; }
+        .chat-input { flex: 1; background: transparent; border: none; color: var(--text-color); font-family: inherit; font-size: 0.75rem; outline: none; padding-right: 8px; }
+        .chat-input::placeholder { color: var(--text-muted); font-style: italic; }
+        .chat-send { background: transparent; border: 1px solid var(--accent-color); color: var(--text-muted); cursor: pointer; padding: 4px 12px; font-family: inherit; font-size: 0.7rem; transition: 0.2s; letter-spacing: 1px; }
+        .chat-send:hover { border-color: var(--terminal-green); color: var(--terminal-green); background: rgba(0, 255, 102, 0.05); }
+
+        /* ==========================================
+           HIGHLIGHT & QUICKCHAT AI MODULE
+           ========================================== */
+        .highlight { 
+            color: var(--terminal-amber); 
+            font-weight: bold; 
+            background: rgba(255, 170, 0, 0.1); 
+            padding: 0 4px; 
+            border-radius: 2px; 
+            letter-spacing: 0.5px;
+        }
+
+        .chat-quickchat { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 6px; 
+            padding: 0.8rem 1rem; 
+            border-top: 1px dashed var(--accent-color); 
+            background: rgba(0, 255, 102, 0.02); 
+        }
+
+        .quick-btn { 
+            background: rgba(0, 255, 102, 0.05); 
+            border: 1px solid var(--accent-color); 
+            color: var(--text-muted); 
+            font-family: inherit;
+            font-size: 0.65rem; 
+            padding: 4px 8px; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            border-radius: 2px; 
+        }
+
+        .quick-btn:hover { 
+            background: var(--terminal-green); 
+            color: var(--bg-color); 
+            border-color: var(--terminal-green);
+            font-weight: bold;
+        }
+
         .system-hud {
             position: fixed; bottom: 0; left: 0; right: 0; background: #030303; border-top: 1px solid var(--accent-color); padding: 0.6rem 2rem; font-size: 0.75rem; color: var(--text-muted); z-index: 10000; display: flex; justify-content: space-between; align-items: center;
         }
@@ -193,8 +276,7 @@
             <h2>// STATUS_MANIFEST</h2>
             <div class="about-layout">
                 <div class="profile-wrapper">
-                    <img src="https://i.ibb.co.com/bgxk8GSk/reeprof.png" alt="Keanu Profile" class="profile-img" id="profile-avatar">
-                </div>
+                    <img src="https://i.ibb.co.com/bgxk8GSk/reeprof.png" alt="Keanu Profile" class="profile-img
                 <div class="about-text">
                     <p>I am a 15-year-old game developer and programmer focused on building high-performance systems. Operating primarily within 2D architecture optimization, procedural pipeline generation, and modular visual log logic.</p>
                 </div>
@@ -231,44 +313,94 @@
             <h2>// CAPABILITY_MODULES</h2>
             <ul class="skill-list">
                 <li class="skill-item" data-info="Engine utama dengan jam terbang tinggi. Mahir arsitektur node dan optimasi scene.">
-                    <div class="skill-name"><span>Godot Engine</span><span class="skill-level-text">MASTERED</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div></div>
+                    <div class="skill-name">
+                        <span>Godot Engine</span>
+                        <span class="skill-level-text">MASTERED</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Sangat menguasai siklus hidup skrip, sinyal bawaan, static typing, dan sistem runtime.">
-                    <div class="skill-name"><span>GDScript</span><span class="skill-level-text">MASTERED</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div></div>
+                    <div class="skill-name">
+                        <span>GDScript</span>
+                        <span class="skill-level-text">MASTERED</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 100%; background: var(--terminal-green);"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 2D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport shader.">
-                    <div class="skill-name"><span>2D Physics & Shaders</span><span class="skill-level-text">ADVANCED (80%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 80%;"></div></div>
+                    <div class="skill-name">
+                        <span>2D Physics & Shaders</span>
+                        <span class="skill-level-text">ADVANCED (80%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 80%;"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Spesialisasi dalam ruang lingkup 3D: kalkulasi fisika, tilemaps, pencahayaan, dan viewport shader.">
-                    <div class="skill-name"><span>3D Physics & Shaders</span><span class="skill-level-text">ADVANCED (75%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 75%;"></div></div>
+                    <div class="skill-name">
+                        <span>3D Physics & Shaders</span>
+                        <span class="skill-level-text">ADVANCED (75%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 75%;"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name"><span>Game UI & UX</span><span class="skill-level-text">ADVANCED (85%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 85%;"></div></div>
+                    <div class="skill-name">
+                        <span>Game UI & UX</span>
+                        <span class="skill-level-text">ADVANCED (85%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 85%;"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name"><span>Game Feel & Juice</span><span class="skill-level-text">ADVANCED (90%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%;"></div></div>
+                    <div class="skill-name">
+                        <span>Game Feel & Juice</span>
+                        <span class="skill-level-text">ADVANCED (90%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 90%;"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika tingkat lanjut, manajemen data, automasi skrip, atau integrasi eksternal.">
-                    <div class="skill-name"><span>Python Scripting</span><span class="skill-level-text">STABLE (60%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 60%;"></div></div>
+                    <div class="skill-name">
+                        <span>Python Scripting</span>
+                        <span class="skill-level-text">STABLE (60%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 60%;"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name"><span>Godot Networking</span><span class="skill-level-text">STABLE (50%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 50%;"></div></div>
+                    <div class="skill-name">
+                        <span>Godot Networking</span>
+                        <span class="skill-level-text">STABLE (50%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 50%;"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name"><span>Web Front-End</span><span class="skill-level-text">STABLE (37.5%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width:37.5%;"></div></div>
+                    <div class="skill-name">
+                        <span>Web Front-End</span>
+                        <span class="skill-level-text">STABLE (37.5%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width:37.5%;"></div>
+                    </div>
                 </li>
                 <li class="skill-item" data-info="Pemrosesan logika jaringan tingkat lanjut, manajemen data koneksi,  atau integrasi jaringan eksternal.">
-                    <div class="skill-name"><span>Web Back-End</span><span class="skill-level-text">STABLE (42.5%)</span></div>
-                    <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 42.5%;"></div></div>
+                    <div class="skill-name">
+                        <span>Web Back-End</span>
+                        <span class="skill-level-text">STABLE (42.5%)</span>
+                    </div>
+                    <div class="skill-progress-bg">
+                        <div class="skill-progress-fill" style="width: 42.5%;"></div>
+                    </div>
                 </li>
             </ul>
         </section>
@@ -318,6 +450,23 @@
             </div>
         </section>
 
+        <section id="affiliations">
+            <h2>// CONNECTED_NODES [AFFILIATIONS]</h2>
+            <div class="logo-grid">
+                <img src="https://lh3.googleusercontent.com/d/1w7MCMN8FPFjZpdow4yuM0Qzyq6rL9rH7" alt="Node Asset 1" class="affiliated-logo">
+                <img src="https://lh3.googleusercontent.com/d/1un0ml0lN0kpyT-Ymyks35sAWS8YkvJFe" alt="Node Asset 1" class="affiliated-logo">
+                <img src="https://lh3.googleusercontent.com/d/1iB-v3UD8Wr8ZNUusyopkcU_3JevsfVuQ" alt="Node Asset 1" class="affiliated-logo">
+                <img src="https://lh3.googleusercontent.com/d/1un0ml0lN0kpyT-Ymyks35sAWS8YkvJFe" alt="Node Asset 1" class="affiliated-logo">
+                <img src="https://lh3.googleusercontent.com/d/16LIUNNgc60cgGRRlevcbVzHg4-0EhRU5" alt="Node Asset 1" class="affiliated-logo">
+                <img src="https://lh3.googleusercontent.com/d/16LIUNNgc60cgGRRlevcbVzHg4-0EhRU5" alt="Node Asset 1" class="affiliated-logo">
+                <img src="https://lh3.googleusercontent.com/d/1un0ml0lN0kpyT-Ymyks35sAWS8YkvJFe" alt="Node Asset 1" class="affiliated-logo">
+            </div>
+            <img src="https://lh3.googleusercontent.com/d/1Oi68-bph-PxSvDKw6Fs5imj7RqmU0iaf" alt="Keanu Profile" class="profile-img-l" id="profile-avatar">
+            <div class="logo-grid">
+                <img src="https://lh3.googleusercontent.com/d/1L4puX6_ujTVr_WAViRZ4JsOrhc1pPL-6" alt="Node Asset 1" class="affiliated-logo">@Jabarra</img>
+            </div>
+        </section>
+
         <section id="related">
             <h2>// RELATED_MEDIA [REMOTE_JSON_FETCH]</h2>
             <div class="slider-container" id="related-slider">
@@ -364,20 +513,51 @@
         </footer>
     </div>
 
+    <div class="chatbot-fab" id="chatbot-toggle" title="Initialize AI Assistant">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+            <circle cx="12" cy="5" r="2"></circle>
+            <path d="M12 7v4"></path>
+            <line x1="8" y1="16" x2="8" y2="16"></line>
+            <line x1="16" y1="16" x2="16" y2="16"></line>
+        </svg>
+    </div>
+
+    <div class="chatbot-window" id="chatbot-window">
+        <div class="chat-header">
+            <span>> JABARRAS_AI_AGENT</span>
+            <span class="chat-close" id="chatbot-close">×</span>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg msg-bot">> SYS_LOG: Sub-rutin AI aktif. Tanyakan saya mengenai log, metrik, atau kapabilitas dari Keanu (Jabarras).</div>
+        </div>
+        
+        <div class="chat-quickchat" id="chat-quickchat">
+            <button class="quick-btn" onclick="sendQuickChat('Siapa Keanu?')">Siapa?</button>
+            <button class="quick-btn" onclick="sendQuickChat('Apa saja karya buatannya?')">Karya?</button>
+            <button class="quick-btn" onclick="sendQuickChat('Di mana Keanu pernah tampil?')">Di mana?</button>
+            <button class="quick-btn" onclick="sendQuickChat('Bagaimana cara menghubunginya?')">Kontak?</button>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chat-input" placeholder="> INPUT_QUERY_HERE..." autocomplete="off">
+            <button class="chat-send" id="chat-send">EXEC</button>
+        </div>
+    </div>
+
     <div class="system-hud">
         <span id="log-status">> STATUS: IDLE. CORE SYSTEM ONLINE.</span>
         <span id="hud-clock">00:00:00</span>
     </div>
 
     <script>
+        // TYPEWRITER EFFECT
         document.getElementById('year').textContent = new Date().getFullYear();
-
         const nameText = "Keanu el jabar nagaputra";
         let index = 0;
         const speed = 100; 
         const element = document.getElementById("typewriter");
         element.textContent = ""; 
-
         function typeEffect() {
             if (index < nameText.length) {
                 element.textContent += nameText.charAt(index);
@@ -386,16 +566,12 @@
             }
         }
 
+        // AUDIO SYSTEM
         let audioCtx = null;
         function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx && audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+            if (audioCtx && audioCtx.state === 'suspended') { audioCtx.resume(); }
         }
-
         function playTerminalClick(frequency = 800, duration = 0.03) {
             initAudio();
             if (!audioCtx || audioCtx.state === 'suspended') return;
@@ -413,6 +589,32 @@
             } catch(e) {}
         }
 
+        const unlockAudio = () => {
+            initAudio();
+            if (audioCtx && audioCtx.state === 'running') {
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('keydown', unlockAudio);
+            }
+        };
+        window.addEventListener('click', unlockAudio);
+        window.addEventListener('keydown', unlockAudio);
+
+        // HUD LOGGER
+        const logStatus = document.getElementById("log-status");
+        function updateLog(text) {
+            logStatus.textContent = text;
+            logStatus.style.color = "var(--terminal-green)";
+        }
+        function resetLog() {
+            logStatus.textContent = "> STATUS: IDLE. INTERACTIVE MONITOR READY.";
+            logStatus.style.color = "var(--text-muted)"; 
+        }
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById("hud-clock").textContent = now.toTimeString().split(' ')[0];
+        }, 1000);
+
+        // GAMES ARRAY (WITH TAGS)
         const ARCHIVE_GAMES = [
             { title: "C850 Found Footage Demo", link: "https://kenx-indie-dev.itch.io/c850-found-footage-demo", desc: "A narrative psychological retro experience capturing eerie atmospheric realism.", img: "https://img.itch.zone/aW1nLzI3ODk4NzM5LnBuZw==/315x250%23c/hJ0S7I.png", tag: "HOT" },
             { title: "SS2D Forcethon", link: "https://kenx-indie-dev.itch.io/ss2d-forcethon", desc: "Physics-driven mechanical optimization framework mapped onto 2D space.", img: "https://img.itch.zone/aW1nLzI3NDExNDc5LnBuZw==/315x250%23c/LJX5Un.png", tag: "Should Try" },
@@ -516,33 +718,7 @@
             }
         }
 
-        const logStatus = document.getElementById("log-status");
-        function updateLog(text) {
-            logStatus.textContent = text;
-            logStatus.style.color = "var(--terminal-green)";
-        }
-        function resetLog() {
-            logStatus.textContent = "> STATUS: IDLE. INTERACTIVE MONITOR READY.";
-            logStatus.style.color = "var(--text-muted)"; 
-        }
-
-        document.querySelectorAll(".record-card").forEach(card => {
-            card.addEventListener("mouseenter", () => {
-                playTerminalClick(1050, 0.02);
-                updateLog(`> QUERY_LINK: MAPPING EXTERNAL SOURCE ADDRESS. CLICK TO VERIFY.`);
-            });
-            card.addEventListener("mouseleave", resetLog);
-        });
-
-        document.querySelectorAll(".skill-item").forEach(item => {
-            item.addEventListener("mouseenter", () => {
-                playTerminalClick(1100, 0.02);
-                const info = item.getAttribute("data-info");
-                updateLog(`> SKILL_INFO: ${info}`);
-            });
-            item.addEventListener("mouseleave", resetLog);
-        });
-
+        // SLIDER LOGIC
         function initSlider(sliderId, prevBtnId, nextBtnId) {
             const container = document.getElementById(sliderId);
             const prevBtn = document.getElementById(prevBtnId);
@@ -562,11 +738,148 @@
             }
         }
 
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById("hud-clock").textContent = now.toTimeString().split(' ')[0];
-        }, 1000);
+        // HOVER EVENTS
+        document.querySelectorAll(".record-card").forEach(card => {
+            card.addEventListener("mouseenter", () => {
+                playTerminalClick(1050, 0.02);
+                updateLog(`> QUERY_LINK: MAPPING EXTERNAL SOURCE ADDRESS. CLICK TO VERIFY.`);
+            });
+            card.addEventListener("mouseleave", resetLog);
+        });
 
+        document.querySelectorAll(".skill-item").forEach(item => {
+            item.addEventListener("mouseenter", () => {
+                playTerminalClick(1100, 0.02);
+                const info = item.getAttribute("data-info");
+                updateLog(`> SKILL_INFO: ${info}`);
+            });
+            item.addEventListener("mouseleave", resetLog);
+        });
+        
+        // HOVER EVENTS FOR AFFILIATED LOGOS
+        document.querySelectorAll(".affiliated-logo").forEach((logo, index) => {
+            logo.addEventListener("mouseenter", () => {
+                playTerminalClick(1150, 0.02);
+                updateLog(`> SYSTEM_LOG: SCANNING CONNECTED NODE ASSET [ID: 0${index + 1}]`);
+            });
+            logo.addEventListener("mouseleave", resetLog);
+        });
+
+        // ==========================================
+        // AI CHATBOT LOGIC & TOPIC REDIRECTION
+        // ==========================================
+        const chatToggle = document.getElementById('chatbot-toggle');
+        const chatWindow = document.getElementById('chatbot-window');
+        const chatClose = document.getElementById('chatbot-close');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+            playTerminalClick(900, 0.02);
+            updateLog("> SYSTEM_LOG: INITIALIZING AI CHAT INTERFACE");
+            if (chatWindow.classList.contains('active')) chatInput.focus();
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+            playTerminalClick(700, 0.02);
+            resetLog();
+        });
+
+        // Mengubah textContent menjadi innerHTML agar bisa merender class "highlight"
+        function appendMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `chat-msg ${sender === 'bot' ? 'msg-bot' : 'msg-user'}`;
+            msgDiv.innerHTML = text; // Mendukung tag HTML
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Fungsi Trigger untuk tombol QuickChat
+        window.sendQuickChat = function(query) {
+            chatInput.value = query;
+            handleChatSubmission();
+        }
+
+        function processAiResponse(userInput) {
+            const cleanInput = userInput.toLowerCase().trim();
+            
+            // 1. VALIDASI TOPIK (Memastikan kueri tidak keluar dari konteks Keanu)
+            const identityPattern = /(keanu|kenu|keano|kianu|jabar|jabarras|jabarra|jbarras|jabaras|nakenx|kenx|fredick|fredik|kamu|kmu|lu|lo|elo|bot|ai|agent|dev|author|owner|pembuat|arsitek|admin|dia)/i;
+            const specificContextPattern = /(godot|gdscript|c850|found|footage|forcethon|ss2d|orbiks|slayer|runlike|rogue|clash|pvcindo|rri|technopark|bahumu|game|skill)/i;
+            const isTopicValid = identityPattern.test(cleanInput) || specificContextPattern.test(cleanInput);
+
+            setTimeout(() => {
+                if (!isTopicValid) {
+                    const offTopicResponses = [
+                        "> ACCESS_DENIED: Kueri di luar otoritas sistem. AI Agent ini dikalibrasi HANYA untuk membahas arsip, metrik, dan portofolio <span class='highlight'>Keanu Jabarra</span>.",
+                        "> PROTOCOL_ERROR: Sektor informasi tidak dikenal. Gunakan tombol QuickChat di atas untuk kueri yang valid."
+                    ];
+                    appendMessage(offTopicResponses[Math.floor(Math.random() * offTopicResponses.length)], 'bot');
+                    playTerminalClick(400, 0.1); 
+                    updateLog("> WARNING: INVALID AI QUERY DETECTED");
+                    return;
+                }
+
+                // 2. MATRIKS ADIKSIMBA (5W1H CLASSIFIER)
+                const isSiapa = /(siapa|who|profil|biodata|identitas|namanya)/i.test(cleanInput);
+                const isApa = /(apa|what|proyek|karya|game|buat|bikin|skill|kemampuan|keahlian|tech stack)/i.test(cleanInput);
+                const isKapan = /(kapan|when|umur|usia|lahir|sejak|tahun)/i.test(cleanInput);
+                const isDimana = /(dimana|di mana|where|lokasi|technopark|rri|jogja|solo|surakarta)/i.test(cleanInput);
+                const isMengapa = /(mengapa|kenapa|why|alasan|fokus|tujuan)/i.test(cleanInput);
+                const isBagaimana = /(bagaimana|gimana|cara|how|hubungi|kontak|sosmed)/i.test(cleanInput);
+                const isGreeting = /(halo|hai|hi|ping|pagi|siang|malam)/i.test(cleanInput);
+
+                let responseText = "";
+
+                // 3. POHON KEPUTUSAN KOMPLEKS (Berdasarkan Fakta Portofolio)
+                if (isSiapa) {
+                    responseText = "> IDENTITY_LOG: <span class='highlight'>Keanu el jabar nagaputra</span> adalah seorang <span class='highlight'>Game Developer berusia 15 tahun</span> dan Architecture Optimizer. Spesialisasinya berada pada optimasi sistem ruang 2D dan procedural pipeline.";
+                } else if (isDimana) {
+                    responseText = "> LOCATION_LOG: Keanu telah melakukan live coding intensif di kawasan <span class='highlight'>Solo Technopark</span> bersama SMPN 20 Surakarta. Ia juga tercatat hadir sebagai narasumber utama di studio radio <span class='highlight'>RRI Pro 1 Jogja</span> dan <span class='highlight'>RRI Pro 2 Surakarta</span>.";
+                } else if (isKapan) {
+                    responseText = "> TIMELINE_LOG: Sistem biologisnya terdeteksi aktif sejak <span class='highlight'>tahun 2011</span> (Usia saat ini: 15 Tahun). Di usianya, jam terbangnya sudah mencapai tahap kompilasi 30+ modul game.";
+                } else if (isMengapa) {
+                    responseText = "> OBJECTIVE_LOG: Mengapa ia mendalami ini? Keanu memiliki fokus tajam pada pengembangan <span class='highlight'>high-performance systems</span> dan integrasi <span class='highlight'>Game Feel Juice (100%)</span>, seperti implementasi screen-shake, trauma systems, dan kalkulasi dinamis fisika di Godot Engine.";
+                } else if (isBagaimana) {
+                    responseText = "> PIPELINE_LOG: Bagaimana cara menghubunginya? Komunikasi terenkripsi dapat diarahkan ke <span class='highlight'>Email: fredick.xdevs@gmail.com</span>. Anda juga dapat meninjau repositori kodenya di <span class='highlight'>GitHub: NaKenx-Kenx</span> atau laboratorium <span class='highlight'>Itch.io: kenx-indie-dev</span>.";
+                } else if (isApa) {
+                    if (/(skill|kemampuan|stack)/i.test(cleanInput)) {
+                        responseText = "> CAPABILITY_LOG: Kemampuan utamanya meliputi <span class='highlight'>Godot Engine & GDScript (MASTERED)</span>, kalkulasi 2D/3D Physics & Shaders (ADVANCED), serta penguasaan Game UI/UX dan Python Scripting.";
+                    } else {
+                        responseText = "> ARCHIVE_LOG: Ia telah mengompilasi <span class='highlight'>30+ karya publik/internal</span>. Proyek andalannya termasuk <span class='highlight'>C850 Found Footage Demo</span> (psikologikal retro), <span class='highlight'>SS2D Forcethon</span> (optimasi 2D mekanik), dan <span class='highlight'>Orbiks Slayer</span>.";
+                    }
+                } else if (isGreeting) {
+                    responseText = "> SYS_LOG: Sistem aktif. Gunakan panel <b>QuickChat</b> di atas, atau ketik pertanyaan langsung dengan pendekatan konseptual <span class='highlight'>5W1H (Siapa, Apa, Kapan, Di mana, Mengapa, Bagaimana)</span>.";
+                } else {
+                    responseText = "> INTEL_FALLBACK: Parameter pencarian valid, namun kurang spesifik. Gunakan format tanya yang jelas seperti: <span class='highlight'>'Siapa Keanu?'</span>, <span class='highlight'>'Di mana ia pernah live coding?'</span>, atau <span class='highlight'>'Apa proyek terbaiknya?'</span>.";
+                }
+
+                // Output ke UI
+                appendMessage(responseText, 'bot');
+                playTerminalClick(1200, 0.05); 
+                updateLog("> SYSTEM_LOG: ADVANCED AI QUERY PROCESSED SUCCESSFULLY");
+
+            }, 800); // Simulasi delay proses berfikir AI
+        }
+
+        function handleChatSubmission() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            appendMessage(text, 'user');
+            chatInput.value = '';
+            playTerminalClick(1000, 0.01);
+            processAiResponse(text);
+        }
+
+        chatSend.addEventListener('click', handleChatSubmission);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleChatSubmission();
+        });
+
+        // INIT LOAD
         window.onload = () => {
             typeEffect();
             scrapeItchGames(); 
@@ -575,22 +888,11 @@
             initSlider('related-slider', 'rel-prev-btn', 'rel-next-btn');
         };
 
-        const unlockAudio = () => {
-            initAudio();
-            if (audioCtx && audioCtx.state === 'running') {
-                window.removeEventListener('click', unlockAudio);
-                window.removeEventListener('keydown', unlockAudio);
-            }
-        };
-        window.addEventListener('click', unlockAudio);
-        window.addEventListener('keydown', unlockAudio);
-
         // ==========================================
         // HIGH PERFORMANCE WEBGL BACKLIT GRID SHADER
         // ==========================================
-        const glCanvas = document.getElementById('fluid-bg');
+        const glCanvas = document.getElementById("fluid-bg"); // PERBAIKAN BUG: Variabel glCanvas ditambahkan agar animasi WebGL bisa jalan
         const glCtx = glCanvas.getContext('webgl');
-
         if (glCtx) {
             const vsSource = `attribute vec2 position; void main() { gl_Position = vec4(position, 0.0, 1.0); }`;
             const fsSource = `
@@ -605,37 +907,30 @@
                     vec2 st = gl_FragCoord.xy / u_resolution.xy;
                     st.x *= u_resolution.x / u_resolution.y;
 
-                    // Grid layout setting (skala kerapihan kotak)
                     float gridScale = 22.0;
                     vec2 gridSt = st * gridScale;
                     vec2 fpos = fract(gridSt);
 
-                    // Menghitung garis tepi grid setipis mungkin
                     float thickness = 0.04;
                     vec2 bl = smoothstep(vec2(0.0), vec2(thickness), fpos);
                     vec2 tr = smoothstep(vec2(0.0), vec2(thickness), 1.0 - fpos);
                     float isLine = 1.0 - (bl.x * bl.y * tr.x * tr.y);
 
-                    // Konfigurasi koordinat lampu latar otomatis & interaksi mouse
                     vec2 mouse = u_mouse / u_resolution;
                     mouse.x *= u_resolution.x / u_resolution.y;
                     
-                    // Pola gerak 2 titik lampu sorot dari belakang grid
                     vec2 light1 = vec2(0.5 + 0.35 * sin(u_time * 0.4), 0.5 + 0.25 * cos(u_time * 0.6));
                     vec2 light2 = vec2(0.4 + 0.25 * cos(u_time * 0.5), 0.4 + 0.30 * sin(u_time * 0.3));
                     
-                    // Kalkulasi radius pancaran sorot lampu latar
                     float glowMouse = exp(-length(st - mouse) * 7.5) * 1.2;
                     float glow1 = exp(-length(st - light1) * 3.5) * 0.9;
                     float glow2 = exp(-length(st - light2) * 4.5) * 0.8;
                     float totalGlow = glowMouse + glow1 + glow2;
 
-                    // Definisi palet warna sistem
-                    vec3 darkBg = vec3(0.015, 0.015, 0.018);       // Isian dalam kotak tetap gelap gulita
-                    vec3 dimLineColor = vec3(0.04, 0.06, 0.04);     // Garis grid default saat tidak kena lampu
-                    vec3 brightGlowColor = vec3(0.0, 1.0, 0.4);    // Sinar Lampu Hijau Terminal murni
+                    vec3 darkBg = vec3(0.015, 0.015, 0.018);       
+                    vec3 dimLineColor = vec3(0.04, 0.06, 0.04);     
+                    vec3 brightGlowColor = vec3(0.0, 1.0, 0.4);    
 
-                    // Mengawinkan warna lampu HANYA pada garis sisi yang terbidik cahaya
                     vec3 lineFinalColor = mix(dimLineColor, brightGlowColor, min(totalGlow, 1.0));
                     vec3 finalOutput = mix(darkBg, lineFinalColor, isLine);
 
@@ -650,7 +945,7 @@
             const pos = glCtx.getAttribLocation(program, "position"); glCtx.enableVertexAttribArray(pos); glCtx.vertexAttribPointer(pos, 2, glCtx.FLOAT, false, 0, 0);
             const uTime = glCtx.getUniformLocation(program, "u_time"); const uRes = glCtx.getUniformLocation(program, "u_resolution"); const uMouse = glCtx.getUniformLocation(program, "u_mouse");
             
-            const renderScale = 0.5; // Mengoptimalkan beban piksel GPU
+            const renderScale = 0.5; 
             let w = glCanvas.width = Math.floor(window.innerWidth * renderScale); 
             let h = glCanvas.height = Math.floor(window.innerHeight * renderScale); 
             glCtx.viewport(0, 0, w, h);

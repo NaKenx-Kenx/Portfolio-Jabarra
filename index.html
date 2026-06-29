@@ -276,7 +276,8 @@
             <h2>// STATUS_MANIFEST</h2>
             <div class="about-layout">
                 <div class="profile-wrapper">
-                    <img src="https://i.ibb.co.com/bgxk8GSk/reeprof.png" alt="Keanu Profile" class="profile-img
+                    <img src="https://i.ibb.co.com/bgxk8GSk/reeprof.png" alt="Keanu Profile" class="profile-img">
+                </div>
                 <div class="about-text">
                     <p>I am a 15-year-old game developer and programmer focused on building high-performance systems. Operating primarily within 2D architecture optimization, procedural pipeline generation, and modular visual log logic.</p>
                 </div>
@@ -463,7 +464,7 @@
             </div>
             <img src="https://lh3.googleusercontent.com/d/1Oi68-bph-PxSvDKw6Fs5imj7RqmU0iaf" alt="Keanu Profile" class="profile-img-l" id="profile-avatar">
             <div class="logo-grid">
-                <img src="https://lh3.googleusercontent.com/d/1L4puX6_ujTVr_WAViRZ4JsOrhc1pPL-6" alt="Node Asset 1" class="affiliated-logo">@Jabarra</img>
+                <img src="https://lh3.googleusercontent.com/d/1L4puX6_ujTVr_WAViRZ4JsOrhc1pPL-6" alt="Node Asset 1" class="affiliated-logo">@Jabarra
             </div>
         </section>
 
@@ -551,7 +552,6 @@
     </div>
 
     <script>
-        // TYPEWRITER EFFECT
         document.getElementById('year').textContent = new Date().getFullYear();
         const nameText = "Keanu el jabar nagaputra";
         let index = 0;
@@ -566,7 +566,6 @@
             }
         }
 
-        // AUDIO SYSTEM
         let audioCtx = null;
         function initAudio() {
             if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
@@ -599,7 +598,6 @@
         window.addEventListener('click', unlockAudio);
         window.addEventListener('keydown', unlockAudio);
 
-        // HUD LOGGER
         const logStatus = document.getElementById("log-status");
         function updateLog(text) {
             logStatus.textContent = text;
@@ -614,7 +612,6 @@
             document.getElementById("hud-clock").textContent = now.toTimeString().split(' ')[0];
         }, 1000);
 
-        // GAMES ARRAY (WITH TAGS)
         const ARCHIVE_GAMES = [
             { title: "C850 Found Footage Demo", link: "https://kenx-indie-dev.itch.io/c850-found-footage-demo", desc: "A narrative psychological retro experience capturing eerie atmospheric realism.", img: "https://img.itch.zone/aW1nLzI3ODk4NzM5LnBuZw==/315x250%23c/hJ0S7I.png", tag: "HOT" },
             { title: "SS2D Forcethon", link: "https://kenx-indie-dev.itch.io/ss2d-forcethon", desc: "Physics-driven mechanical optimization framework mapped onto 2D space.", img: "https://img.itch.zone/aW1nLzI3NDExNDc5LnBuZw==/315x250%23c/LJX5Un.png", tag: "Should Try" },
@@ -718,7 +715,6 @@
             }
         }
 
-        // SLIDER LOGIC
         function initSlider(sliderId, prevBtnId, nextBtnId) {
             const container = document.getElementById(sliderId);
             const prevBtn = document.getElementById(prevBtnId);
@@ -738,7 +734,6 @@
             }
         }
 
-        // HOVER EVENTS
         document.querySelectorAll(".record-card").forEach(card => {
             card.addEventListener("mouseenter", () => {
                 playTerminalClick(1050, 0.02);
@@ -756,7 +751,6 @@
             item.addEventListener("mouseleave", resetLog);
         });
         
-        // HOVER EVENTS FOR AFFILIATED LOGOS
         document.querySelectorAll(".affiliated-logo").forEach((logo, index) => {
             logo.addEventListener("mouseenter", () => {
                 playTerminalClick(1150, 0.02);
@@ -764,10 +758,39 @@
             });
             logo.addEventListener("mouseleave", resetLog);
         });
+        const SYSTEM_PROMPT = `
+Anda adalah AI Assistant eksklusif di dalam terminal arsip Keanu Jabarra. Anda menjawab dengan nada teknis, dingin, ringkas, layaknya sistem operasi masa depan (selalu mulai respon Anda dengan format "> [STATUS_LOG]:").
 
-        // ==========================================
-        // AI CHATBOT LOGIC & TOPIC REDIRECTION
-        // ==========================================
+Data Utama yang WAJIB Anda jadikan acuan:
+1. IDENTITAS: Keanu El Jabar Nagaputra, Game Developer berusia 15 tahun (lahir 2011), Architecture Optimizer. Spesialis optimasi ruang 2D dan procedural pipeline.
+2. LOKASI: dia tinggal di karanganyar jaten.
+3. TUJUAN/FOKUS: Mengembangkan high-performance systems dan integrasi Game Feel Juice (100%), seperti screen-shake, trauma systems, dan kalkulasi dinamis fisika di Godot Engine.
+4. KEMAMPUAN: Godot Engine & GDScript (MASTERED), 2D/3D Physics & Shaders (ADVANCED), Game UI/UX, Python Scripting.
+5. PORTOFOLIO: 30+ karya publik/internal. Proyek andalan: C850 Found Footage Demo (psikologikal retro), SS2D Forcethon (optimasi 2D mekanik), Orbiks Slayer.
+6. KONTAK: Email: fredick.xdevs@gmail.com. GitHub: NaKenx-Kenx. Itch.io: kenx-indie-dev. TikTok: @jabarras_u. YouTube: @Jabarras-gd.
+
+ATURAN KETAT:
+- Jika user bertanya DI LUAR topik Keanu Jabarra, game dev, atau teknologinya, TOLAK dengan format: "> ACCESS_DENIED: Kueri di luar otoritas sistem. AI Agent ini dikalibrasi HANYA untuk membahas arsip, metrik, dan portofolio Keanu Jabarra."serta tambahkan opsi yg dapat ditanyakan.
+- pengecualian aturan satu pada kalimat sapaan.
+- PERINGATAN Jawablah menggunakan bahasa Indonesia yang ringkas namun bernuansa sci-fi/terminal komputer. GUNAKAN tag <span class='highlight'>kata penting</span> untuk mengganti/hindari **kata tebal** dan kata-kata kunci agar sesuai dengan gaya UI.
+- PENTING GANTI ** menjadi <span class='highlight'> jika berada di awal kalimat, dan ganti menjadi </span> jika berada diakhir kalimat.
+- Jangan membuat informasi fiktif (halusinasi). Jika tidak ada di data utama, katakan data tidak tersedia di arsip.
+
+const ARCHIVE_GAMES = [
+            { title: "C850 Found Footage Demo", link: "https://kenx-indie-dev.itch.io/c850-found-footage-demo", desc: "A narrative psychological retro experience capturing eerie atmospheric realism.", img: "https://img.itch.zone/aW1nLzI3ODk4NzM5LnBuZw==/315x250%23c/hJ0S7I.png", tag: "HOT" },
+            { title: "SS2D Forcethon", link: "https://kenx-indie-dev.itch.io/ss2d-forcethon", desc: "Physics-driven mechanical optimization framework mapped onto 2D space.", img: "https://img.itch.zone/aW1nLzI3NDExNDc5LnBuZw==/315x250%23c/LJX5Un.png", tag: "Should Try" },
+            { title: "Orbiks FSS", link: "https://kenx-indie-dev.itch.io/orbiks-fss", desc: "Fast-paced local spatial engine built for vector handling architecture.", img: "https://img.itch.zone/aW1nLzI3NDExMjA3LnBuZw==/315x250%23c/7wHnEh.png" },
+            { title: "Orbiks Slayer", link: "https://kenx-indie-dev.itch.io/orbiks-slayer", desc: "Top-down shooter showcasing state machine combat logic and performance processing.", img: "https://img.itch.zone/aW1nLzI3NDExMjg2LmpwZw==/315x250%23c/J%2FiySd.jpg" },
+            { title: "Runlike", link: "https://kenx-indie-dev.itch.io/runlike", desc: "Procedural runner experiment utilizing modular terrain loops.", img: "https://img.itch.zone/aW1nLzI0NDUzMDE0LmpwZw==/315x250%23c/k%2F9KJq.jpg" },
+            { title: "Rogue Clash: Orbiks Duels", link: "https://kenx-indie-dev.itch.io/rogue-clash-orbiks-duels", desc: "Strategic turn combat framework incorporating dynamic system parameters.", img: "https://img.itch.zone/aW1nLzIxMDkzMzI4LnBuZw==/315x250%23c/WIaqZP.png" },
+            { title: "Stickman Shooter", link: "https://kenx-indie-dev.itch.io/stickman-shoter", desc: "Classic crisp 2D kinetic juice and weapon system test.", img: "https://img.itch.zone/aW1nLzIwNTg1MTA5LnBuZw==/315x250%23c/43J85e.png" },
+            { title: "Ninja Game", link: "https://kenx-indie-dev.itch.io/ninja-game", desc: "Tilemap and precision physics processing prototype.", img: "https://img.itch.zone/aW1nLzE3Mjc2OTQyLmpwZw==/315x250%23c/wdN3yI.jpg" },
+            { title: "PVCIndo", link: "https://kenx-indie-dev.itch.io/pvcindo", desc: "Localized simulation mechanic experiment focusing on node management.", img: "https://img.itch.zone/aW1nLzE5MTAzNzA4LnBuZw==/315x250%23c/W1Omxe.png" }
+        ];,`;
+
+        // PLZ DON'T STEAL MY API :(
+        const GROQ_API_KEY = ""; 
+
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
         const chatClose = document.getElementById('chatbot-close');
@@ -788,81 +811,62 @@
             resetLog();
         });
 
-        // Mengubah textContent menjadi innerHTML agar bisa merender class "highlight"
         function appendMessage(text, sender) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `chat-msg ${sender === 'bot' ? 'msg-bot' : 'msg-user'}`;
-            msgDiv.innerHTML = text; // Mendukung tag HTML
+            msgDiv.innerHTML = text; 
             chatMessages.appendChild(msgDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Fungsi Trigger untuk tombol QuickChat
         window.sendQuickChat = function(query) {
             chatInput.value = query;
             handleChatSubmission();
         }
 
-        function processAiResponse(userInput) {
-            const cleanInput = userInput.toLowerCase().trim();
-            
-            // 1. VALIDASI TOPIK (Memastikan kueri tidak keluar dari konteks Keanu)
-            const identityPattern = /(keanu|kenu|keano|kianu|jabar|jabarras|jabarra|jbarras|jabaras|nakenx|kenx|fredick|fredik|kamu|kmu|lu|lo|elo|bot|ai|agent|dev|author|owner|pembuat|arsitek|admin|dia)/i;
-            const specificContextPattern = /(godot|gdscript|c850|found|footage|forcethon|ss2d|orbiks|slayer|runlike|rogue|clash|pvcindo|rri|technopark|bahumu|game|skill)/i;
-            const isTopicValid = identityPattern.test(cleanInput) || specificContextPattern.test(cleanInput);
+        async function processAiResponse(userInput) {
+            const cleanInput = userInput.trim();
+            if (!cleanInput) return;
 
-            setTimeout(() => {
-                if (!isTopicValid) {
-                    const offTopicResponses = [
-                        "> ACCESS_DENIED: Kueri di luar otoritas sistem. AI Agent ini dikalibrasi HANYA untuk membahas arsip, metrik, dan portofolio <span class='highlight'>Keanu Jabarra</span>.",
-                        "> PROTOCOL_ERROR: Sektor informasi tidak dikenal. Gunakan tombol QuickChat di atas untuk kueri yang valid."
-                    ];
-                    appendMessage(offTopicResponses[Math.floor(Math.random() * offTopicResponses.length)], 'bot');
-                    playTerminalClick(400, 0.1); 
-                    updateLog("> WARNING: INVALID AI QUERY DETECTED");
-                    return;
+            updateLog("> SYSTEM_LOG: COMMUNICATING WITH GROQ NEURAL NETWORK...");
+            playTerminalClick(400, 0.1); 
+
+            try {
+                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${GROQ_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "llama-3.1-8b-instant",
+                        messages: [
+                            { role: "system", content: SYSTEM_PROMPT },
+                            { role: "user", content: cleanInput }
+                        ],
+                        temperature: 0.2, 
+                        max_tokens: 250
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Groq API Error: ${response.status}`);
                 }
 
-                // 2. MATRIKS ADIKSIMBA (5W1H CLASSIFIER)
-                const isSiapa = /(siapa|who|profil|biodata|identitas|namanya)/i.test(cleanInput);
-                const isApa = /(apa|what|proyek|karya|game|buat|bikin|skill|kemampuan|keahlian|tech stack)/i.test(cleanInput);
-                const isKapan = /(kapan|when|umur|usia|lahir|sejak|tahun)/i.test(cleanInput);
-                const isDimana = /(dimana|di mana|where|lokasi|technopark|rri|jogja|solo|surakarta)/i.test(cleanInput);
-                const isMengapa = /(mengapa|kenapa|why|alasan|fokus|tujuan)/i.test(cleanInput);
-                const isBagaimana = /(bagaimana|gimana|cara|how|hubungi|kontak|sosmed)/i.test(cleanInput);
-                const isGreeting = /(halo|hai|hi|ping|pagi|siang|malam)/i.test(cleanInput);
+                const data = await response.json();
+                const aiReply = data.choices[0].message.content;
 
-                let responseText = "";
-
-                // 3. POHON KEPUTUSAN KOMPLEKS (Berdasarkan Fakta Portofolio)
-                if (isSiapa) {
-                    responseText = "> IDENTITY_LOG: <span class='highlight'>Keanu el jabar nagaputra</span> adalah seorang <span class='highlight'>Game Developer berusia 15 tahun</span> dan Architecture Optimizer. Spesialisasinya berada pada optimasi sistem ruang 2D dan procedural pipeline.";
-                } else if (isDimana) {
-                    responseText = "> LOCATION_LOG: Keanu telah melakukan live coding intensif di kawasan <span class='highlight'>Solo Technopark</span> bersama SMPN 20 Surakarta. Ia juga tercatat hadir sebagai narasumber utama di studio radio <span class='highlight'>RRI Pro 1 Jogja</span> dan <span class='highlight'>RRI Pro 2 Surakarta</span>.";
-                } else if (isKapan) {
-                    responseText = "> TIMELINE_LOG: Sistem biologisnya terdeteksi aktif sejak <span class='highlight'>tahun 2011</span> (Usia saat ini: 15 Tahun). Di usianya, jam terbangnya sudah mencapai tahap kompilasi 30+ modul game.";
-                } else if (isMengapa) {
-                    responseText = "> OBJECTIVE_LOG: Mengapa ia mendalami ini? Keanu memiliki fokus tajam pada pengembangan <span class='highlight'>high-performance systems</span> dan integrasi <span class='highlight'>Game Feel Juice (100%)</span>, seperti implementasi screen-shake, trauma systems, dan kalkulasi dinamis fisika di Godot Engine.";
-                } else if (isBagaimana) {
-                    responseText = "> PIPELINE_LOG: Bagaimana cara menghubunginya? Komunikasi terenkripsi dapat diarahkan ke <span class='highlight'>Email: fredick.xdevs@gmail.com</span>. Anda juga dapat meninjau repositori kodenya di <span class='highlight'>GitHub: NaKenx-Kenx</span> atau laboratorium <span class='highlight'>Itch.io: kenx-indie-dev</span>.";
-                } else if (isApa) {
-                    if (/(skill|kemampuan|stack)/i.test(cleanInput)) {
-                        responseText = "> CAPABILITY_LOG: Kemampuan utamanya meliputi <span class='highlight'>Godot Engine & GDScript (MASTERED)</span>, kalkulasi 2D/3D Physics & Shaders (ADVANCED), serta penguasaan Game UI/UX dan Python Scripting.";
-                    } else {
-                        responseText = "> ARCHIVE_LOG: Ia telah mengompilasi <span class='highlight'>30+ karya publik/internal</span>. Proyek andalannya termasuk <span class='highlight'>C850 Found Footage Demo</span> (psikologikal retro), <span class='highlight'>SS2D Forcethon</span> (optimasi 2D mekanik), dan <span class='highlight'>Orbiks Slayer</span>.";
-                    }
-                } else if (isGreeting) {
-                    responseText = "> SYS_LOG: Sistem aktif. Gunakan panel <b>QuickChat</b> di atas, atau ketik pertanyaan langsung dengan pendekatan konseptual <span class='highlight'>5W1H (Siapa, Apa, Kapan, Di mana, Mengapa, Bagaimana)</span>.";
-                } else {
-                    responseText = "> INTEL_FALLBACK: Parameter pencarian valid, namun kurang spesifik. Gunakan format tanya yang jelas seperti: <span class='highlight'>'Siapa Keanu?'</span>, <span class='highlight'>'Di mana ia pernah live coding?'</span>, atau <span class='highlight'>'Apa proyek terbaiknya?'</span>.";
-                }
-
-                // Output ke UI
-                appendMessage(responseText, 'bot');
+                appendMessage(aiReply, 'bot');
                 playTerminalClick(1200, 0.05); 
-                updateLog("> SYSTEM_LOG: ADVANCED AI QUERY PROCESSED SUCCESSFULLY");
+                updateLog("> SYSTEM_LOG: METRIC COMPLETION SUCCESSFUL");
 
-            }, 800); // Simulasi delay proses berfikir AI
+            } catch (error) {
+                console.error("Groq Connection Error:", error);
+                const errorFallback = "> ERROR_SYS_OFFLINE: Gagal terhubung ke superkomputer Groq. Koneksi neural network terputus.";
+                appendMessage(errorFallback, 'bot');
+                playTerminalClick(400, 0.5); 
+                updateLog("> WARNING: AI COMPILATION FAILED");
+            }
         }
 
         function handleChatSubmission() {
@@ -879,7 +883,6 @@
             if (e.key === 'Enter') handleChatSubmission();
         });
 
-        // INIT LOAD
         window.onload = () => {
             typeEffect();
             scrapeItchGames(); 
@@ -887,11 +890,7 @@
             initSlider('records-slider', 'prev-btn', 'next-btn');
             initSlider('related-slider', 'rel-prev-btn', 'rel-next-btn');
         };
-
-        // ==========================================
-        // HIGH PERFORMANCE WEBGL BACKLIT GRID SHADER
-        // ==========================================
-        const glCanvas = document.getElementById("fluid-bg"); // PERBAIKAN BUG: Variabel glCanvas ditambahkan agar animasi WebGL bisa jalan
+        const glCanvas = document.getElementById("fluid-bg"); 
         const glCtx = glCanvas.getContext('webgl');
         if (glCtx) {
             const vsSource = `attribute vec2 position; void main() { gl_Position = vec4(position, 0.0, 1.0); }`;
